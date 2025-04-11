@@ -1,6 +1,6 @@
 "use client"
 
-import {Burger, Button, Container, Group} from '@mantine/core';
+import {Burger, Button, Container, Drawer, Group, Stack} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import classes from '@/components/header.module.css';
 import Link from "next/link";
@@ -17,6 +17,8 @@ export function Header() {
   const [opened, { toggle }] = useDisclosure(false);
   const pathname = usePathname()
 
+  const logo = <Button>Logo</Button>
+
   const items = links.map((link) => (
     <Link
       key={link.label}
@@ -31,12 +33,34 @@ export function Header() {
   return (
     <header className={classes.header}>
       <Container size="md" className={classes.inner}>
-        <Button>Logo</Button>
+        {logo}
+
+        {/* Desktop nav */}
         <Group gap={5} visibleFrom="xs">
           {items}
         </Group>
 
+        {/* Burger button for mobile */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+
+        <Drawer.Root opened={opened}
+                     onClose={toggle}
+                     size="100%"
+                     padding="md"
+                     hiddenFrom="xs">
+          <Drawer.Overlay />
+          <Drawer.Content>
+            <Drawer.Header>
+              <Drawer.Title>
+                {logo}
+              </Drawer.Title>
+              <Drawer.CloseButton />
+            </Drawer.Header>
+            <Drawer.Body>
+              <Stack>{items}</Stack>
+            </Drawer.Body>
+          </Drawer.Content>
+        </Drawer.Root>
       </Container>
     </header>
   );
