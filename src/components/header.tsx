@@ -1,6 +1,15 @@
 "use client";
 
-import { Burger, Button, Container, Drawer, Group, Stack } from "@mantine/core";
+import {
+  Burger,
+  Button,
+  Container,
+  Drawer,
+  Group,
+  Divider,
+  ScrollArea,
+  Stack,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "@/components/header.module.css";
 import Link from "next/link";
@@ -40,6 +49,11 @@ export function Header() {
           {...items}
         </Group>
 
+        <Group visibleFrom="sm">
+          <Button variant="default">Log in</Button>
+          <Button>Sign up</Button>
+        </Group>
+
         {/* Burger button for mobile */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
 
@@ -49,6 +63,7 @@ export function Header() {
           size="100%"
           padding="md"
           hiddenFrom="xs"
+          zIndex={1000000}
         >
           <Drawer.Overlay />
           <Drawer.Content>
@@ -57,7 +72,17 @@ export function Header() {
               <Drawer.CloseButton />
             </Drawer.Header>
             <Drawer.Body>
-              <Stack>{...items}</Stack>
+              <ScrollArea h="calc(100vh - 80px" mx="-md">
+                <Stack justify="space-between">
+                  <Divider my="sm" />
+                  <>{...items}</>
+                  <Divider my="sm" />
+                  <Group justify="center" grow pb="xl" px="md">
+                    <Button variant="default">Log in</Button>
+                    <Button>Sign up</Button>
+                  </Group>
+                </Stack>
+              </ScrollArea>
             </Drawer.Body>
           </Drawer.Content>
         </Drawer.Root>
