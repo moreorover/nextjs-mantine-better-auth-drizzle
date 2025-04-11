@@ -11,6 +11,7 @@ import { GeistMono } from 'geist/font/mono';
 import theme from "./theme";
 import "./globals.css";
 import {Shell} from "@/components/shell";
+import {Header} from "@/components/header";
 
 
 export const metadata: Metadata = {
@@ -30,9 +31,10 @@ export default function RootLayout({
     </head>
     <body className="antialiased">
     <MantineProvider  defaultColorScheme="dark" theme={theme}>
-      <Shell>
+      <Header />
+      {/*<Shell>*/}
       {children}
-      </Shell>
+      {/*</Shell>*/}
     </MantineProvider>
     </body>
     </html>
