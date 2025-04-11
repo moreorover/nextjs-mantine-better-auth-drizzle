@@ -10,7 +10,6 @@ import { GeistMono } from 'geist/font/mono';
 
 import theme from "./theme";
 import "./globals.css";
-import {Shell} from "@/components/shell";
 import {Header} from "@/components/header";
 
 
@@ -32,9 +31,7 @@ export default function RootLayout({
     <body className="antialiased">
     <MantineProvider  defaultColorScheme="dark" theme={theme}>
       <Header />
-      {/*<Shell>*/}
       {children}
-      {/*</Shell>*/}
     </MantineProvider>
     </body>
     </html>
