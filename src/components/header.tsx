@@ -37,7 +37,7 @@ export function Header() {
 
         {/* Desktop nav */}
         <Group gap={5} visibleFrom="xs">
-          {items}
+          {...items}
         </Group>
 
         {/* Burger button for mobile */}
@@ -57,7 +57,7 @@ export function Header() {
               <Drawer.CloseButton />
             </Drawer.Header>
             <Drawer.Body>
-              <Stack>{items}</Stack>
+              <Stack>{...items}</Stack>
             </Drawer.Body>
           </Drawer.Content>
         </Drawer.Root>
