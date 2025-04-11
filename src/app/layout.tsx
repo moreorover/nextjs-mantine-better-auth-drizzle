@@ -10,6 +10,7 @@ import { GeistMono } from 'geist/font/mono';
 
 import theme from "./theme";
 import "./globals.css";
+import {Header} from "@/components/header";
 
 
 export const metadata: Metadata = {
@@ -29,6 +30,7 @@ export default function RootLayout({
     </head>
     <body className="antialiased">
     <MantineProvider  defaultColorScheme="dark" theme={theme}>
+      <Header />
       {children}
     </MantineProvider>
     </body>
