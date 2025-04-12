@@ -27,7 +27,10 @@ jobs:
 
       # Run the Build
       - name: Run Build
+        environment:
+          name: development
         env:
           BETTER_AUTH_URL: http://localhost:3000
           NEXT_PUBLIC_APP_URL: http://localhost:3000
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npm run build
