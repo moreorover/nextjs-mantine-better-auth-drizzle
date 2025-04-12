@@ -4,9 +4,9 @@ import {
   Burger,
   Button,
   Container,
+  Divider,
   Drawer,
   Group,
-  Divider,
   ScrollArea,
   Stack,
 } from "@mantine/core";
