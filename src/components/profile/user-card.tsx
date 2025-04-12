@@ -8,9 +8,15 @@ import {
   Card,
   Container,
   Group,
+  Loader,
   Stack,
   Text,
 } from "@mantine/core";
+import { useRouter } from "next/navigation";
+import { UAParser } from "ua-parser-js";
+import { notifications } from "@mantine/notifications";
+import { useState } from "react";
+import { Icon } from "@iconify/react";
 
 interface Props {
   session: Session | null;
@@ -18,6 +24,8 @@ interface Props {
 }
 
 export default function UserCard(props: Props) {
+  const [isTerminating, setIsTerminating] = useState<string>();
+  const router = useRouter();
   const { data, isPending } = authClient.useSession();
   const session = data || props.session;
   return (
@@ -39,6 +47,66 @@ export default function UserCard(props: Props) {
             </Group>
             <Button disabled>Edit</Button>
           </Group>
+
+          <Text size="xs">Sessions</Text>
+
+          {props.activeSessions
+            .filter((s) => s.userAgent)
+            .map((s) => {
+              const parser = new UAParser(s.userAgent || "");
+              const deviceType = parser.getDevice().type;
+              const osName = parser.getOS().name;
+              const browserName = parser.getBrowser().name;
+
+              return (
+                <Group key={s.id}>
+                  {deviceType === "mobile" ? (
+                    <Icon icon="lucide:smartphone" width={16} height={16} />
+                  ) : (
+                    <Icon icon="lucide:laptop" width={16} height={16} />
+                  )}
+                  <Text size="sm">
+                    {osName}, {browserName}
+                  </Text>
+                  <Button
+                    size="xs"
+                    variant="subtle"
+                    color="red"
+                    onClick={async () => {
+                      setIsTerminating(s.id);
+                      const res = await authClient.revokeSession({
+                        token: s.token,
+                      });
+
+                      if (res.error) {
+                        notifications.show({
+                          color: "red",
+                          title: "Failed",
+                          message: res.error.message,
+                        });
+                      } else {
+                        notifications.show({
+                          color: "emerald",
+                          title: "Success",
+                          message: "Session terminated successfully",
+                        });
+                      }
+
+                      router.refresh();
+                      setIsTerminating(undefined);
+                    }}
+                  >
+                    {isTerminating === s.id ? (
+                      <Loader size={14} />
+                    ) : s.id === session?.session.id ? (
+                      "Sign Out"
+                    ) : (
+                      "Terminate"
+                    )}
+                  </Button>
+                </Group>
+              );
+            })}
         </Stack>
       </Card>
     </Container>
