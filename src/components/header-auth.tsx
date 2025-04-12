@@ -6,10 +6,12 @@ import cx from "clsx";
 import classes from "@/components/header-auth.module.css";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
+import { useRouter } from "next/navigation";
 
 export function HeaderAuth() {
   const session = authClient.useSession();
   const user = session.data?.user;
+  const router = useRouter();
 
   return (
     <>
@@ -39,6 +41,15 @@ export function HeaderAuth() {
               leftSection={
                 <Icon icon={"lucide:log-out"} width={16} height={16} />
               }
+              onClick={async () => {
+                await authClient.signOut({
+                  fetchOptions: {
+                    onSuccess() {
+                      router.push("/sign-in");
+                    },
+                  },
+                });
+              }}
             >
               Logout
             </Menu.Item>

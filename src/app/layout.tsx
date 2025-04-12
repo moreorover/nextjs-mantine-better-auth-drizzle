@@ -13,6 +13,8 @@ import theme from "./theme";
 import "./globals.css";
 import "@mantine/notifications/styles.css";
 import { Header } from "@/components/header";
+import { ModalsProvider } from "@mantine/modals";
+import { Enable2Fa } from "@/components/profile/enable-2fa-modal";
 
 export const metadata: Metadata = {
   title: "Prive Video",
@@ -35,9 +37,11 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <MantineProvider defaultColorScheme="dark" theme={theme}>
-          <Notifications />
-          <Header />
-          {children}
+          <ModalsProvider modals={{ enable2fa: Enable2Fa }}>
+            <Notifications />
+            <Header />
+            {children}
+          </ModalsProvider>
         </MantineProvider>
       </body>
     </html>

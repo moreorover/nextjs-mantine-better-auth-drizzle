@@ -18,6 +18,7 @@ import { UAParser } from "ua-parser-js";
 import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
+import { modals } from "@mantine/modals";
 
 interface Props {
   session: Session | null;
@@ -117,6 +118,40 @@ export default function UserCard(props: Props) {
           <Divider />
 
           <Text size="xs">Two Factor</Text>
+
+          <Button
+            leftSection={
+              session?.user.twoFactorEnabled ? (
+                <Icon
+                  icon="lucide:shield-off"
+                  width={14}
+                  height={14}
+                  style={{ color: "red" }}
+                />
+              ) : (
+                <Icon
+                  icon="lucide:shield-check"
+                  width={14}
+                  height={14}
+                  style={{ color: "green" }}
+                />
+              )
+            }
+            variant="default"
+            onClick={() =>
+              modals.openContextModal({
+                modal: "enable2fa",
+                title: session?.user.twoFactorEnabled
+                  ? "Disable 2FA"
+                  : "Enable 2FA",
+                innerProps: {
+                  session,
+                },
+              })
+            }
+          >
+            {session?.user.twoFactorEnabled ? "Disable 2FA" : "Enable 2FA"}
+          </Button>
         </Stack>
       </Card>
     </Container>
