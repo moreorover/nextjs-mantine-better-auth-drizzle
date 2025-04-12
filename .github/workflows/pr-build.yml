@@ -9,6 +9,8 @@ jobs:
   build:
     name: Build and Validate PR
     runs-on: ubuntu-latest
+    environment:
+      name: development
 
     steps:
       # Checkout the code from the PR
@@ -27,8 +29,6 @@ jobs:
 
       # Run the Build
       - name: Run Build
-        environment:
-          name: development
         env:
           BETTER_AUTH_URL: http://localhost:3000
           NEXT_PUBLIC_APP_URL: http://localhost:3000
