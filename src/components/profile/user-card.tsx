@@ -26,7 +26,7 @@ interface Props {
 export default function UserCard(props: Props) {
   const [isTerminating, setIsTerminating] = useState<string>();
   const router = useRouter();
-  const { data, isPending } = authClient.useSession();
+  const { data } = authClient.useSession();
   const session = data || props.session;
   return (
     <Container size={"xs"} py={12}>
