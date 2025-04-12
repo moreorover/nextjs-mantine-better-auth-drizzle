@@ -72,8 +72,8 @@ export const Enable2Fa = ({
             }
             setIsPendingTwoFa(true);
             if (innerProps.session.user.twoFactorEnabled) {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               const res = await authClient.twoFactor.disable({
-                //@ts-ignore
                 password: twoFaPassword,
                 fetchOptions: {
                   onError(context) {
@@ -122,6 +122,7 @@ export const Enable2Fa = ({
                 });
                 return;
               }
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               const res = await authClient.twoFactor.enable({
                 password: twoFaPassword,
                 fetchOptions: {
