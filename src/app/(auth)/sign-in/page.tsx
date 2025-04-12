@@ -1,8 +1,8 @@
 "use client";
 
 import { Container, Tabs } from "@mantine/core";
-import SignIn from "@/components/sign-in";
-import SignUp from "@/components/sign-up";
+import SignIn from "@/components/auth/sign-in";
+import SignUp from "@/components/auth/sign-up";
 
 export default function Page() {
   return (

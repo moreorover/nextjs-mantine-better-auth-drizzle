@@ -17,7 +17,7 @@ import { usePathname } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 
 const links = [
-  { link: "/about", label: "Features" },
+  { link: "/about", label: "About" },
   { link: "/pricing", label: "Pricing" },
   { link: "/learn", label: "Learn" },
   { link: "/community", label: "Community" },

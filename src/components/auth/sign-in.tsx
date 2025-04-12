@@ -14,6 +14,7 @@ import { zodResolver } from "mantine-form-zod-resolver";
 import { signInSchema } from "@/lib/auth-schema";
 import { authClient } from "@/lib/auth-client";
 import { notifications } from "@mantine/notifications";
+import { redirect } from "next/navigation";
 
 export default function SignIn() {
   const form = useForm({
@@ -21,13 +22,13 @@ export default function SignIn() {
     initialValues: {
       email: process.env.NODE_ENV === "development" ? "x@x.com" : "",
       password: process.env.NODE_ENV === "development" ? "password123" : "",
-      rememberMe: false,
+      rememberMe: true,
     },
-
     validate: zodResolver(signInSchema),
   });
 
   async function handleSubmit(values: typeof form.values) {
+    console.log({ values });
     const { email, password, rememberMe } = values;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, error } = await authClient.signIn.email(
@@ -45,6 +46,7 @@ export default function SignIn() {
         },
         onSuccess: () => {
           form.reset();
+          redirect("/profile");
         },
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         onError: (ctx) => {
