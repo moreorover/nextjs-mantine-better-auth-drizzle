@@ -5,13 +5,12 @@ import {
   MantineProvider,
 } from "@mantine/core";
 
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 
 import theme from "./theme";
 import "./globals.css";
-import {Header} from "@/components/header";
-
+import { Header } from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Prive Video",
@@ -19,21 +18,25 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                     children,
-                                   }: Readonly<{
+  children,
+}: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" {...mantineHtmlProps} className={`${GeistSans.variable} ${GeistMono.variable}`}>
-    <head>
-      <ColorSchemeScript />
-    </head>
-    <body className="antialiased">
-    <MantineProvider  defaultColorScheme="dark" theme={theme}>
-      <Header />
-      {children}
-    </MantineProvider>
-    </body>
+    <html
+      lang="en"
+      {...mantineHtmlProps}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+    >
+      <head>
+        <ColorSchemeScript />
+      </head>
+      <body className="antialiased">
+        <MantineProvider defaultColorScheme="dark" theme={theme}>
+          <Header />
+          {children}
+        </MantineProvider>
+      </body>
     </html>
   );
 }

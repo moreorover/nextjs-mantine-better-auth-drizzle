@@ -10,19 +10,19 @@ const theme = createTheme({
   },
   colors: {
     bright_orange: [
-      '#fff8e1',
-      '#ffefcb',
-      '#ffdd9a',
-      '#ffca64',
-      '#ffba38',
-      '#ffb01b',
-      '#ffab09',
-      '#e39500',
-      '#cb8400',
-      '#b07100'
+      "#fff8e1",
+      "#ffefcb",
+      "#ffdd9a",
+      "#ffca64",
+      "#ffba38",
+      "#ffb01b",
+      "#ffab09",
+      "#e39500",
+      "#cb8400",
+      "#b07100",
     ],
   },
-  primaryColor: "bright_orange"
+  primaryColor: "bright_orange",
 });
 
 export default theme;
