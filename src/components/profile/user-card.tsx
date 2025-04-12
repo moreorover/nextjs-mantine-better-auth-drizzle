@@ -48,7 +48,19 @@ export default function UserCard(props: Props) {
               </div>
             </Group>
             <Group gap="sm">
-              <Button disabled>Edit</Button>
+              <Button
+                onClick={() =>
+                  modals.openContextModal({
+                    modal: "editUser",
+                    title: "Edit User",
+                    innerProps: {
+                      fullName: session?.user.name,
+                    },
+                  })
+                }
+              >
+                Edit
+              </Button>
               <Button disabled>Change Password</Button>
             </Group>
           </Group>
