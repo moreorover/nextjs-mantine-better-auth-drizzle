@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ActionIcon,
   Burger,
   Button,
   Container,
@@ -9,12 +10,14 @@ import {
   Group,
   ScrollArea,
   Stack,
+  useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "@/components/header.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HeaderAuth } from "@/components/header-auth";
+import { Icon } from "@iconify/react";
 
 const links = [
   { link: "/about", label: "About" },
@@ -40,6 +43,12 @@ export function Header() {
     </Link>
   ));
 
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
+
+  const toggleColorScheme = () => {
+    setColorScheme(colorScheme === "light" ? "dark" : "light");
+  };
+
   return (
     <header className={classes.header}>
       <Container size="md" className={classes.inner}>
@@ -50,7 +59,21 @@ export function Header() {
           {...items}
         </Group>
 
-        <HeaderAuth />
+        <Group gap={5} visibleFrom="sm">
+          <HeaderAuth />
+          <ActionIcon
+            variant="default"
+            size="sm"
+            onClick={toggleColorScheme}
+            title="Toggle color scheme"
+          >
+            {colorScheme === "light" ? (
+              <Icon icon={"lucide:sun"} width={14} height={14} />
+            ) : (
+              <Icon icon={"lucide:moon"} width={14} height={14} />
+            )}
+          </ActionIcon>
+        </Group>
 
         {/* Burger button for mobile */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
@@ -76,6 +99,18 @@ export function Header() {
                   <>{...items}</>
                   <Divider my="sm" />
                   <HeaderAuth />
+                  <ActionIcon
+                    variant="default"
+                    size="sm"
+                    onClick={toggleColorScheme}
+                    title="Toggle color scheme"
+                  >
+                    {colorScheme === "light" ? (
+                      <Icon icon={"lucide:sun"} width={14} height={14} />
+                    ) : (
+                      <Icon icon={"lucide:moon"} width={14} height={14} />
+                    )}
+                  </ActionIcon>
                 </Stack>
               </ScrollArea>
             </Drawer.Body>
