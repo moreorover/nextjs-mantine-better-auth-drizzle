@@ -27,4 +27,7 @@ jobs:
 
       # Run the Build
       - name: Run Build
+        env:
+          BETTER_AUTH_URL: http://localhost:3000
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
         run: npm run build
