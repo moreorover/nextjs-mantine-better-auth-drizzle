@@ -9,7 +9,6 @@ import { redirect } from "next/navigation";
 import { notifications } from "@mantine/notifications";
 
 export default function Page() {
-  console.log("xxxxxxxxxxxxxxxxx");
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
