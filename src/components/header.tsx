@@ -45,7 +45,7 @@ export function Header() {
         {logo}
 
         {/* Desktop nav */}
-        <Group gap={5} visibleFrom="xs">
+        <Group gap={5} visibleFrom="sm">
           {...items}
         </Group>
 
@@ -55,14 +55,14 @@ export function Header() {
         </Group>
 
         {/* Burger button for mobile */}
-        <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
 
         <Drawer.Root
           opened={opened}
           onClose={toggle}
           size="100%"
           padding="md"
-          hiddenFrom="xs"
+          hiddenFrom="sm"
           zIndex={1000000}
         >
           <Drawer.Overlay />
