@@ -28,7 +28,6 @@ export default function SignIn() {
   });
 
   async function handleSubmit(values: typeof form.values) {
-    console.log({ values });
     const { email, password, rememberMe } = values;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, error } = await authClient.signIn.email(
@@ -36,7 +35,7 @@ export default function SignIn() {
         email,
         password,
         rememberMe,
-        callbackURL: "/features",
+        // callbackURL: "/about",
       },
       {
         onRequest: () => {
@@ -46,7 +45,6 @@ export default function SignIn() {
         },
         onSuccess: () => {
           form.reset();
-          redirect("/profile");
         },
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         onError: (ctx) => {

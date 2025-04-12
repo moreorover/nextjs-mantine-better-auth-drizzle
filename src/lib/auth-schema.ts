@@ -28,3 +28,7 @@ export const signUpSchema = z
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
+
+export const twoFactorSchema = z.object({
+  totp: z.string().length(6, "Totp is 6 digits long"),
+});
