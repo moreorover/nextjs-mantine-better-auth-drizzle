@@ -32,3 +32,15 @@ export const signUpSchema = z
 export const twoFactorSchema = z.object({
   totp: z.string().length(6, "Totp is 6 digits long"),
 });
+
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string(),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string().min(6, "Please confirm your password"),
+    signOut: z.boolean(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });

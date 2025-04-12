@@ -61,7 +61,17 @@ export default function UserCard(props: Props) {
               >
                 Edit
               </Button>
-              <Button disabled>Change Password</Button>
+              <Button
+                onClick={() =>
+                  modals.openContextModal({
+                    modal: "changePassword",
+                    title: "Change Password",
+                    innerProps: {},
+                  })
+                }
+              >
+                Change Password
+              </Button>
             </Group>
           </Group>
 

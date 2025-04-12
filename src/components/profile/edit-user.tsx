@@ -40,6 +40,7 @@ export const EditUser = ({
             title: "Success",
             message: "Name updated",
           });
+          context.closeModal(id);
         },
         onError: (error) => {
           notifications.show({
@@ -51,7 +52,6 @@ export const EditUser = ({
       },
     });
     setIsLoading(false);
-    context.closeModal(id);
   }
 
   return (
