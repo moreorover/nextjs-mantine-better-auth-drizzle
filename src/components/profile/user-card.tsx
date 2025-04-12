@@ -7,6 +7,7 @@ import {
   Button,
   Card,
   Container,
+  Divider,
   Group,
   Loader,
   Stack,
@@ -45,8 +46,13 @@ export default function UserCard(props: Props) {
                 </Text>
               </div>
             </Group>
-            <Button disabled>Edit</Button>
+            <Group gap="sm">
+              <Button disabled>Edit</Button>
+              <Button disabled>Change Password</Button>
+            </Group>
           </Group>
+
+          <Divider />
 
           <Text size="xs">Sessions</Text>
 
@@ -107,6 +113,10 @@ export default function UserCard(props: Props) {
                 </Group>
               );
             })}
+
+          <Divider />
+
+          <Text size="xs">Two Factor</Text>
         </Stack>
       </Card>
     </Container>
