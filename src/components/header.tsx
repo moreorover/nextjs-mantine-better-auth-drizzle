@@ -14,7 +14,7 @@ import { useDisclosure } from "@mantine/hooks";
 import classes from "@/components/header.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
+import { HeaderAuth } from "@/components/header-auth";
 
 const links = [
   { link: "/about", label: "About" },
@@ -26,9 +26,6 @@ const links = [
 export function Header() {
   const [opened, { toggle }] = useDisclosure(false);
   const pathname = usePathname();
-  const session = authClient.useSession();
-
-  console.log(session?.data?.user);
 
   const logo = <Button>Logo</Button>;
 
@@ -53,12 +50,7 @@ export function Header() {
           {...items}
         </Group>
 
-        <Group visibleFrom="sm">
-          <Button component={Link} variant="default" href={"/sign-in"}>
-            Sign in
-          </Button>
-          <Button>Sign up</Button>
-        </Group>
+        <HeaderAuth />
 
         {/* Burger button for mobile */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
@@ -83,10 +75,7 @@ export function Header() {
                   <Divider my="sm" />
                   <>{...items}</>
                   <Divider my="sm" />
-                  <Group justify="center" grow pb="xl" px="md">
-                    <Button variant="default">Log in</Button>
-                    <Button>Sign up</Button>
-                  </Group>
+                  <HeaderAuth />
                 </Stack>
               </ScrollArea>
             </Drawer.Body>
