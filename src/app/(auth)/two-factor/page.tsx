@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Card, Container, PinInput, Text } from "@mantine/core";
+import { Button, Card, Container, PinInput, Stack, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { twoFactorSchema } from "@/lib/auth-schema";
@@ -48,20 +48,22 @@ export default function Page() {
   return (
     <Container size="xs">
       <Card shadow="sm" padding="lg" radius="md" withBorder>
-        <Text fw={500}>TOTP Verification</Text>
-        <Text size="xs">Enter your 6-digit TOTP code to authenticate</Text>
-        <form onSubmit={form.onSubmit(handleSubmit)}>
-          <PinInput
-            oneTimeCode
-            type="number"
-            length={6}
-            key={form.key("totp")}
-            {...form.getInputProps("totp")}
-          />
-          <Button fullWidth mt="xl" type="submit">
-            Verify
-          </Button>
-        </form>
+        <Stack>
+          <Text fw={500}>TOTP Verification</Text>
+          <Text size="xs">Enter your 6-digit TOTP code to authenticate</Text>
+          <form onSubmit={form.onSubmit(handleSubmit)}>
+            <PinInput
+              oneTimeCode
+              type="number"
+              length={6}
+              key={form.key("totp")}
+              {...form.getInputProps("totp")}
+            />
+            <Button fullWidth mt="xl" type="submit">
+              Verify
+            </Button>
+          </form>
+        </Stack>
       </Card>
     </Container>
   );

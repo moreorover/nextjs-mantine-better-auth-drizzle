@@ -14,7 +14,6 @@ import { zodResolver } from "mantine-form-zod-resolver";
 import { signInSchema } from "@/lib/auth-schema";
 import { authClient } from "@/lib/auth-client";
 import { notifications } from "@mantine/notifications";
-import { redirect } from "next/navigation";
 
 export default function SignIn() {
   const form = useForm({
@@ -22,7 +21,7 @@ export default function SignIn() {
     initialValues: {
       email: process.env.NODE_ENV === "development" ? "x@x.com" : "",
       password: process.env.NODE_ENV === "development" ? "password123" : "",
-      rememberMe: true,
+      rememberMe: false,
     },
     validate: zodResolver(signInSchema),
   });
@@ -35,7 +34,6 @@ export default function SignIn() {
         email,
         password,
         rememberMe,
-        // callbackURL: "/about",
       },
       {
         onRequest: () => {
@@ -88,7 +86,7 @@ export default function SignIn() {
               label="Remember me"
               name="rememberMe"
               key={form.key("rememberMe")}
-              {...form.getInputProps("rememberMe")}
+              {...form.getInputProps("rememberMe", { type: "checkbox" })}
             />
             <Anchor size="sm" href="#">
               Forgot Password？
