@@ -1,5 +1,19 @@
-import { Button } from "@mantine/core";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import UserCard from "@/components/profile/user-card";
 
-export default function Page() {
-  return <Button>Profile Page</Button>;
+export default async function Page() {
+  const [session, activeSessions] = await Promise.all([
+    auth.api.getSession({
+      headers: await headers(),
+    }),
+    auth.api.listSessions({
+      headers: await headers(),
+    }),
+  ]).catch((e) => {
+    console.log(e);
+    throw redirect("/sign-in");
+  });
+  return <UserCard session={session} activeSessions={activeSessions} />;
 }
