@@ -14,6 +14,7 @@ import { useDisclosure } from "@mantine/hooks";
 import classes from "@/components/header.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const links = [
   { link: "/about", label: "Features" },
@@ -25,6 +26,9 @@ const links = [
 export function Header() {
   const [opened, { toggle }] = useDisclosure(false);
   const pathname = usePathname();
+  const session = authClient.useSession();
+
+  console.log(session?.data?.user);
 
   const logo = <Button>Logo</Button>;
 
@@ -50,7 +54,9 @@ export function Header() {
         </Group>
 
         <Group visibleFrom="sm">
-          <Button variant="default">Log in</Button>
+          <Button component={Link} variant="default" href={"/sign-in"}>
+            Sign in
+          </Button>
           <Button>Sign up</Button>
         </Group>
 

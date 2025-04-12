@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const formSchema = z.object({
+export const signInSchema = z.object({
   name: z
     .string()
     .min(2, { message: "Name must be at least 2 characters long" })
@@ -16,9 +16,19 @@ export const formSchema = z.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters long" })
     .max(50, { message: "Password cannot exceed 50 characters" }),
+
+  rememberMe: z.boolean(),
 });
 
-export const signInFormSchema = formSchema.pick({
-  email: true,
-  password: true,
-});
+export const signUpSchema = z
+  .object({
+    firstName: z.string().min(1, "First name is required"),
+    lastName: z.string().min(1, "Last name is required"),
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string().min(6, "Please confirm your password"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
