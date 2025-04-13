@@ -9,6 +9,7 @@ export async function middleware(request: NextRequest) {
     if (!twoFactorCookie) {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
+    return NextResponse.next();
   }
 
   const cookies = getSessionCookie(request);
