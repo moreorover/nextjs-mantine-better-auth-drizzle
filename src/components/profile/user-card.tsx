@@ -2,6 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import {
+  Alert,
   Avatar,
   Button,
   Card,
@@ -31,6 +32,8 @@ export default function UserCard(props: Props) {
   const router = useRouter();
   const { data } = authClient.useSession();
   const session = data || props.session;
+  const [emailVerificationPending, setEmailVerificationPending] =
+    useState<boolean>(false);
   return (
     <Container size={"xs"} py={12}>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -77,6 +80,55 @@ export default function UserCard(props: Props) {
           </Group>
 
           <Divider />
+
+          {!props.session?.user.emailVerified && (
+            <Alert
+              variant="light"
+              color="red"
+              title="Verify Your Email Address"
+              icon={<Icon icon="lucide:info" width={16} height={16} />}
+            >
+              <Stack>
+                Please verify your email address. Check your inbox for the
+                verification email. If you haven&#39;t received the email, click
+                the button below to resend.
+                <Button
+                  loading={emailVerificationPending}
+                  variant="outline"
+                  color="red"
+                  onClick={async () => {
+                    await authClient.sendVerificationEmail(
+                      {
+                        email: session?.user.email || "",
+                      },
+                      {
+                        onRequest() {
+                          setEmailVerificationPending(true);
+                        },
+                        onError(context) {
+                          notifications.show({
+                            color: "red",
+                            title: "Failed",
+                            message: context.error.message,
+                          });
+                        },
+                        onSuccess() {
+                          notifications.show({
+                            color: "green",
+                            title: "Success",
+                            message: "Verification email sent successfully",
+                          });
+                        },
+                      },
+                    );
+                    setEmailVerificationPending(false);
+                  }}
+                >
+                  Resend Verification Email
+                </Button>
+              </Stack>
+            </Alert>
+          )}
 
           <Text size="xs">Sessions</Text>
 

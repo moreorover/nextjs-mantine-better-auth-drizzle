@@ -28,6 +28,18 @@ export const auth = betterAuth({
       twoFactor: twoFactorSchema,
     },
   }),
+  emailVerification: {
+    async sendVerificationEmail({ user, url }) {
+      const res = await resend.emails.send({
+        from,
+        to: user.email,
+        subject: "Verify your email address",
+        // TODO produce react email component
+        html: `<a href="${url}">Verify your email address</a>`,
+      });
+      console.log(res, user.email);
+    },
+  },
   emailAndPassword: {
     enabled: true,
     async sendResetPassword({ user, url }) {
