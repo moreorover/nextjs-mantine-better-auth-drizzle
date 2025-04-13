@@ -24,6 +24,7 @@ export default function Page() {
     const { data, error } = await authClient.twoFactor.verifyTotp(
       {
         code: totp,
+        trustDevice: true,
       },
       {
         onRequest: () => {

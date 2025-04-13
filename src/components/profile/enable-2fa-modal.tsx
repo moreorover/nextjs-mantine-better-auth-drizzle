@@ -17,7 +17,6 @@ import QRCode from "react-qr-code";
 import { authClient } from "@/lib/auth-client";
 import { Session } from "@/lib/auth-schema";
 
-
 export const Enable2Fa = ({
   context,
   id,
@@ -99,6 +98,7 @@ export const Enable2Fa = ({
               if (twoFactorVerifyURI) {
                 await authClient.twoFactor.verifyTotp({
                   code: twoFaPassword,
+                  trustDevice: true,
                   fetchOptions: {
                     onError(context) {
                       setIsPendingTwoFa(false);

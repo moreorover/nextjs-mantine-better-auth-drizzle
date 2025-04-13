@@ -20,8 +20,8 @@ export default function SignIn() {
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
-      email: process.env.NODE_ENV === "development" ? "x@x.com" : "",
-      password: process.env.NODE_ENV === "development" ? "password123" : "",
+      email: "",
+      password: "",
       rememberMe: false,
     },
     validate: zodResolver(signInSchema),
@@ -35,6 +35,7 @@ export default function SignIn() {
         email,
         password,
         rememberMe,
+        callbackURL: "/profile",
       },
       {
         onRequest: () => {
