@@ -1,7 +1,9 @@
 "use client";
 
 import {
+  Box,
   Button,
+  Center,
   Container,
   Loader,
   PasswordInput,
@@ -37,17 +39,20 @@ export const Enable2Fa = ({
             : "Enable 2FA to secure your account"}
         </Text>
         {twoFactorVerifyURI ? (
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-center">
-              <QRCode value={twoFactorVerifyURI} />
-            </div>
+          <>
+            <Center p={12} bg="#ffffff">
+              <Box p={16} bg="white" style={{ borderRadius: 8 }}>
+                <QRCode value={twoFactorVerifyURI} />
+              </Box>
+            </Center>
+
             <TextInput
               label="Scan the QR code with your TOTP app"
               value={twoFaPassword}
               onChange={(e) => setTwoFaPassword(e.target.value)}
               placeholder="Enter OTP"
             />
-          </div>
+          </>
         ) : (
           <div className="flex flex-col gap-2">
             <PasswordInput
@@ -73,8 +78,7 @@ export const Enable2Fa = ({
             }
             setIsPendingTwoFa(true);
             if (innerProps.session.user.twoFactorEnabled) {
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              const res = await authClient.twoFactor.disable({
+              await authClient.twoFactor.disable({
                 password: twoFaPassword,
                 fetchOptions: {
                   onError(context) {
@@ -88,7 +92,7 @@ export const Enable2Fa = ({
                     notifications.show({
                       color: "green",
                       title: "Success",
-                      message: "2FA enabled successfully",
+                      message: "2FA disabled successfully",
                     });
                     context.closeModal(id);
                   },
@@ -124,8 +128,7 @@ export const Enable2Fa = ({
                 });
                 return;
               }
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              const res = await authClient.twoFactor.enable({
+              await authClient.twoFactor.enable({
                 password: twoFaPassword,
                 fetchOptions: {
                   onError(context) {
@@ -137,11 +140,11 @@ export const Enable2Fa = ({
                   },
                   onSuccess(ctx) {
                     setTwoFactorVerifyURI(ctx.data.totpURI);
-                    notifications.show({
-                      color: "green",
-                      title: "Success",
-                      message: "2FA enabled successfully",
-                    });
+                    // notifications.show({
+                    //   color: "green",
+                    //   title: "Success",
+                    //   message: "2FA enabled successfully",
+                    // });
                     // setTwoFactorDialog(false);
                     // context.closeModal(id);
                   },
@@ -161,7 +164,7 @@ export const Enable2Fa = ({
           )}
         </Button>
         <Button fullWidth mt="md" onClick={() => context.closeModal(id)}>
-          Close modal
+          Cancel
         </Button>
       </Stack>
     </Container>
