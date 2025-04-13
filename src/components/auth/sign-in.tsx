@@ -88,7 +88,7 @@ export default function SignIn() {
               key={form.key("rememberMe")}
               {...form.getInputProps("rememberMe", { type: "checkbox" })}
             />
-            <Anchor size="sm" href="#">
+            <Anchor size="sm" href="/forget-password">
               Forgot Password？
             </Anchor>
           </Group>

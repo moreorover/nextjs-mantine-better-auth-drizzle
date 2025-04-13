@@ -11,6 +11,10 @@ import {
 
 import { db } from "@/db/drizzle";
 import { twoFactor } from "better-auth/plugins";
+import { resend } from "@/lib/email/resend";
+import { reactResetPasswordEmail } from "@/lib/email/reset-password";
+
+const from = process.env.BETTER_AUTH_EMAIL || "delivered@resend.dev";
 
 export const auth = betterAuth({
   appName: "prive-video",
@@ -26,6 +30,17 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    async sendResetPassword({ user, url }) {
+      await resend.emails.send({
+        from,
+        to: user.email,
+        subject: "Reset your password",
+        react: reactResetPasswordEmail({
+          username: user.email,
+          resetLink: url,
+        }),
+      });
+    },
   },
   plugins: [twoFactor(), nextCookies()], // make sure nextCookies is the last plugin in the array
 });
