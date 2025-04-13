@@ -6,15 +6,8 @@ import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 
 import { authClient } from "@/lib/auth-client";
-import { Session } from "@/lib/auth-schema";
 
-export const TotpVerification = ({
-  context,
-  id,
-  innerProps,
-}: ContextModalProps<{
-  session: Session;
-}>) => {
+export const TotpVerification = ({ context, id }: ContextModalProps) => {
   const [isPendingTwoFa, setIsPendingTwoFa] = useState<boolean>(false);
   const [twoFaPassword, setTwoFaPassword] = useState<string>("");
 
