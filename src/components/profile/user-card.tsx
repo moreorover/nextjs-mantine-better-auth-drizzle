@@ -194,6 +194,29 @@ export default function UserCard(props: Props) {
 
           <Text size="xs">Two Factor</Text>
 
+          {session?.user.twoFactorEnabled && (
+            <Button
+              leftSection={
+                <Icon
+                  icon="lucide:qr-code"
+                  width={14}
+                  height={14}
+                  // style={{ color: "green" }}
+                />
+              }
+              variant="default"
+              onClick={() =>
+                modals.openContextModal({
+                  modal: "showTwoFactorQrCode",
+                  title: "Scan QR Code",
+                  innerProps: {},
+                })
+              }
+            >
+              Scan QR Code
+            </Button>
+          )}
+
           <Button
             leftSection={
               session?.user.twoFactorEnabled ? (

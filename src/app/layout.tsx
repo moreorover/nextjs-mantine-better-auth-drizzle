@@ -17,6 +17,7 @@ import { EditUser } from "@/components/profile/edit-user";
 import { Enable2Fa } from "@/components/profile/enable-2fa-modal";
 
 import theme from "./theme";
+import { Show2Fa } from "@/components/profile/show-2fa-modal";
 
 export const metadata: Metadata = {
   title: "Prive Video",
@@ -44,6 +45,7 @@ export default function RootLayout({
               enable2fa: Enable2Fa,
               editUser: EditUser,
               changePassword: ChangePassword,
+              showTwoFactorQrCode: Show2Fa,
             }}
           >
             <Notifications />
