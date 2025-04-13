@@ -10,8 +10,6 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const importPlugin = await import("eslint-plugin-import");
-
 const eslintConfig = [
   ...compat.extends(
     "next",
@@ -19,37 +17,6 @@ const eslintConfig = [
     "next/typescript",
     "prettier",
   ),
-  {
-    plugins: {
-      import: importPlugin.default ?? importPlugin,
-    },
-    rules: {
-      // Organize imports
-      "import/order": [
-        "error",
-        {
-          groups: [
-            "builtin", // Node "builtin" modules (fs, path)
-            "external", // npm modules (react, lodash)
-            "internal", // Aliased paths (e.g. @/components)
-            ["parent", "sibling", "index"], // Relative imports
-          ],
-          pathGroups: [
-            {
-              pattern: "@/**",
-              group: "internal",
-            },
-          ],
-          pathGroupsExcludedImportTypes: ["builtin"],
-          alphabetize: {
-            order: "asc",
-            caseInsensitive: true,
-          },
-          "newlines-between": "always",
-        },
-      ],
-    },
-  },
 ];
 
 export default eslintConfig;
