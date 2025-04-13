@@ -5,11 +5,23 @@ import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { resetPasswordSchema } from "@/lib/auth-schema";
 import { authClient } from "@/lib/auth-client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { notifications } from "@mantine/notifications";
 import { useSearchParams, useRouter } from "next/navigation";
+import { LoaderSkeleton } from "@/components/loader-skeleton";
+import { ErrorBoundary } from "react-error-boundary";
 
 export default function Page() {
+  return (
+    <Suspense fallback={<LoaderSkeleton />}>
+      <ErrorBoundary fallback={<p>Error</p>}>
+        <SuspensePage />
+      </ErrorBoundary>
+    </Suspense>
+  );
+}
+
+function SuspensePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const searchParams = useSearchParams();
   const token = searchParams.get("token") || undefined;
