@@ -19,6 +19,7 @@ import { Enable2Fa } from "@/components/profile/enable-2fa-modal";
 import theme from "./theme";
 import { Show2Fa } from "@/components/profile/show-2fa-modal";
 import { ShowBackupCodes } from "@/components/profile/show-backup-codes";
+import { TotpVerification } from "@/components/profile/totp-verification";
 
 export const metadata: Metadata = {
   title: "Prive Video",
@@ -48,6 +49,7 @@ export default function RootLayout({
               changePassword: ChangePassword,
               showTwoFactorQrCode: Show2Fa,
               showBackupCodes: ShowBackupCodes,
+              totpVerification: TotpVerification,
             }}
           >
             <Notifications />

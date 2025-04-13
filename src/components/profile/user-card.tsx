@@ -198,7 +198,7 @@ export default function UserCard(props: Props) {
             <Button
               leftSection={
                 <Icon
-                  icon="lucide:qr-code"
+                  icon="lucide:scroll-text"
                   width={14}
                   height={14}
                   // style={{ color: "green" }}
@@ -207,8 +207,8 @@ export default function UserCard(props: Props) {
               variant="default"
               onClick={() =>
                 modals.openContextModal({
-                  modal: "showBackupCodes",
-                  title: "Show Backup Codes",
+                  modal: "totpVerification",
+                  title: "Verify TOTP",
                   innerProps: {},
                 })
               }
