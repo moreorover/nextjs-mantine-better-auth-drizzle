@@ -17,9 +17,10 @@
 // export const GET = withLogging(authHandler.GET);
 // export const POST = withLogging(authHandler.POST);
 
-import { auth } from "@/lib/auth";
 import { toNextJsHandler } from "better-auth/next-js";
 import { NextRequest } from "next/server";
+
+import { auth } from "@/lib/auth";
 
 export const { GET } = toNextJsHandler(auth);
 

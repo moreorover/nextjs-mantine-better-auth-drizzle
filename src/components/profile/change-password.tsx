@@ -1,6 +1,5 @@
 "use client";
 
-import { ContextModalProps } from "@mantine/modals";
 import {
   Button,
   Checkbox,
@@ -9,11 +8,13 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import { authClient } from "@/lib/auth-client";
-import { notifications } from "@mantine/notifications";
 import { useForm } from "@mantine/form";
+import { ContextModalProps } from "@mantine/modals";
+import { notifications } from "@mantine/notifications";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { useState } from "react";
+
+import { authClient } from "@/lib/auth-client";
 import { changePasswordSchema } from "@/lib/auth-schema";
 
 export const ChangePassword = ({ context, id }: ContextModalProps) => {

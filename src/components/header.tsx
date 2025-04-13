@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import {
   ActionIcon,
   Burger,
@@ -13,11 +14,11 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import classes from "@/components/header.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import { HeaderAuth } from "@/components/header-auth";
-import { Icon } from "@iconify/react";
+import classes from "@/components/header.module.css";
 
 const links = [
   { link: "/about", label: "About" },

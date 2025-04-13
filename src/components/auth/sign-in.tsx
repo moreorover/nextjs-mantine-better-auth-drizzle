@@ -10,10 +10,11 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
-import { signInSchema } from "@/lib/auth-schema";
-import { authClient } from "@/lib/auth-client";
 import { notifications } from "@mantine/notifications";
+import { zodResolver } from "mantine-form-zod-resolver";
+
+import { authClient } from "@/lib/auth-client";
+import { signInSchema } from "@/lib/auth-schema";
 
 export default function SignIn() {
   const form = useForm({
@@ -55,6 +56,7 @@ export default function SignIn() {
       },
     );
   }
+
   return (
     <Container py={12}>
       <Card shadow="sm" padding="lg" radius="md" withBorder>

@@ -1,6 +1,5 @@
 "use client";
 
-import { ContextModalProps } from "@mantine/modals";
 import {
   Button,
   Container,
@@ -10,11 +9,14 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import QRCode from "react-qr-code";
-import { useState } from "react";
-import { Session } from "@/lib/auth-schema";
-import { authClient } from "@/lib/auth-client";
+import { ContextModalProps } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
+import { useState } from "react";
+import QRCode from "react-qr-code";
+
+import { authClient } from "@/lib/auth-client";
+import { Session } from "@/lib/auth-schema";
+
 
 export const Enable2Fa = ({
   context,

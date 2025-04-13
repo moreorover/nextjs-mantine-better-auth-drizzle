@@ -1,13 +1,14 @@
 "use client";
 
-import { ContextModalProps } from "@mantine/modals";
 import { Button, Container, Stack, Text, TextInput } from "@mantine/core";
-import { authClient } from "@/lib/auth-client";
-import { notifications } from "@mantine/notifications";
 import { useForm } from "@mantine/form";
+import { ContextModalProps } from "@mantine/modals";
+import { notifications } from "@mantine/notifications";
 import { zodResolver } from "mantine-form-zod-resolver";
-import { z } from "zod";
 import { useState } from "react";
+import { z } from "zod";
+
+import { authClient } from "@/lib/auth-client";
 
 export const EditUser = ({
   context,

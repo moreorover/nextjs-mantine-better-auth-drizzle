@@ -1,6 +1,7 @@
 "use client";
 
 import { Container, Tabs } from "@mantine/core";
+
 import SignIn from "@/components/auth/sign-in";
 import SignUp from "@/components/auth/sign-up";
 

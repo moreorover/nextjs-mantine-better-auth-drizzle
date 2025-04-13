@@ -1,12 +1,13 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
-import { Group, UnstyledButton, Text, Button, Menu } from "@mantine/core";
-import cx from "clsx";
-import classes from "@/components/header-auth.module.css";
-import Link from "next/link";
 import { Icon } from "@iconify/react";
+import { Button, Group, Menu, Text, UnstyledButton } from "@mantine/core";
+import cx from "clsx";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+import classes from "@/components/header-auth.module.css";
+import { authClient } from "@/lib/auth-client";
 
 export function HeaderAuth() {
   const session = authClient.useSession();

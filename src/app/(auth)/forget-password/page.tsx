@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import {
   Alert,
   Button,
@@ -10,12 +11,12 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
-import { forgotPasswordSchema } from "@/lib/auth-schema";
-import { authClient } from "@/lib/auth-client";
-import { useState } from "react";
 import { notifications } from "@mantine/notifications";
-import { Icon } from "@iconify/react";
+import { zodResolver } from "mantine-form-zod-resolver";
+import { useState } from "react";
+
+import { authClient } from "@/lib/auth-client";
+import { forgotPasswordSchema } from "@/lib/auth-schema";
 
 export default function Page() {
   const [isSubmitting, setIsSubmitting] = useState(false);

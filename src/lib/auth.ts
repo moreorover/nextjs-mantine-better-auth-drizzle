@@ -1,16 +1,16 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import {
-  user,
-  account,
-  session,
-  verification,
-  twoFactor as twoFactorSchema,
-} from "@/db/schema";
+import { twoFactor } from "better-auth/plugins";
 
 import { db } from "@/db/drizzle";
-import { twoFactor } from "better-auth/plugins";
+import {
+  account,
+  session,
+  twoFactor as twoFactorSchema,
+  user,
+  verification,
+} from "@/db/schema";
 import { resend } from "@/lib/email/resend";
 import { reactResetPasswordEmail } from "@/lib/email/reset-password";
 

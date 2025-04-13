@@ -2,14 +2,15 @@
 
 import { Button, Card, Container, PasswordInput, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
-import { resetPasswordSchema } from "@/lib/auth-schema";
-import { authClient } from "@/lib/auth-client";
-import { Suspense, useState } from "react";
 import { notifications } from "@mantine/notifications";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { useSearchParams, useRouter } from "next/navigation";
-import { LoaderSkeleton } from "@/components/loader-skeleton";
+import { Suspense, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+
+import { LoaderSkeleton } from "@/components/loader-skeleton";
+import { authClient } from "@/lib/auth-client";
+import { resetPasswordSchema } from "@/lib/auth-schema";
 
 export default function Page() {
   return (

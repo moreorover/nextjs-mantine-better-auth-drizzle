@@ -2,11 +2,12 @@
 
 import { Button, Card, Container, PinInput, Stack, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
-import { twoFactorSchema } from "@/lib/auth-schema";
-import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
 import { notifications } from "@mantine/notifications";
+import { zodResolver } from "mantine-form-zod-resolver";
+import { redirect } from "next/navigation";
+
+import { authClient } from "@/lib/auth-client";
+import { twoFactorSchema } from "@/lib/auth-schema";
 
 export default function Page() {
   const form = useForm({
@@ -45,6 +46,7 @@ export default function Page() {
       },
     );
   }
+
   return (
     <Container size="xs">
       <Card shadow="sm" padding="lg" radius="md" withBorder>

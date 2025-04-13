@@ -1,7 +1,6 @@
 "use client";
 
-import { Session } from "@/lib/auth-schema";
-import { authClient } from "@/lib/auth-client";
+import { Icon } from "@iconify/react";
 import {
   Avatar,
   Button,
@@ -13,12 +12,14 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import { useRouter } from "next/navigation";
-import { UAParser } from "ua-parser-js";
-import { notifications } from "@mantine/notifications";
-import { useState } from "react";
-import { Icon } from "@iconify/react";
 import { modals } from "@mantine/modals";
+import { notifications } from "@mantine/notifications";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { UAParser } from "ua-parser-js";
+
+import { authClient } from "@/lib/auth-client";
+import { Session } from "@/lib/auth-schema";
 
 interface Props {
   session: Session | null;

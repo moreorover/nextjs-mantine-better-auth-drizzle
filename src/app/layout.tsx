@@ -1,22 +1,22 @@
-import type { Metadata } from "next";
 import {
   ColorSchemeScript,
   mantineHtmlProps,
   MantineProvider,
 } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
-
-import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+import type { Metadata } from "next";
 
-import theme from "./theme";
 import "./globals.css";
 import "@mantine/notifications/styles.css";
 import { Header } from "@/components/header";
-import { ModalsProvider } from "@mantine/modals";
-import { Enable2Fa } from "@/components/profile/enable-2fa-modal";
-import { EditUser } from "@/components/profile/edit-user";
 import { ChangePassword } from "@/components/profile/change-password";
+import { EditUser } from "@/components/profile/edit-user";
+import { Enable2Fa } from "@/components/profile/enable-2fa-modal";
+
+import theme from "./theme";
 
 export const metadata: Metadata = {
   title: "Prive Video",
