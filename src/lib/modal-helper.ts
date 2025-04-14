@@ -1,6 +1,6 @@
-import { ContextModalProps, modals } from "@mantine/modals";
+import { type ContextModalProps, modals } from "@mantine/modals";
 
-import { Session } from "@/lib/auth-schema";
+import type { Session } from "@/lib/auth-schema";
 
 export type ModalNames =
   | "totpVerification"

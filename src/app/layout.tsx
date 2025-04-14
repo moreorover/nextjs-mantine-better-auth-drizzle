@@ -1,7 +1,7 @@
 import {
-  ColorSchemeScript,
-  mantineHtmlProps,
-  MantineProvider,
+	ColorSchemeScript,
+	mantineHtmlProps,
+	MantineProvider,
 } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
@@ -22,42 +22,42 @@ import { TotpVerification } from "@/components/profile/totp-verification";
 import theme from "./theme";
 
 export const metadata: Metadata = {
-  title: "Prive Video",
-  description: "Video Courses",
+	title: "Prive Video",
+	description: "Video Courses",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="en"
-      {...mantineHtmlProps}
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
-    >
-      <head>
-        <ColorSchemeScript />
-      </head>
-      <body className="antialiased">
-        <MantineProvider defaultColorScheme="dark" theme={theme}>
-          <ModalsProvider
-            modals={{
-              enable2fa: Enable2Fa,
-              editUser: EditUser,
-              changePassword: ChangePassword,
-              showTwoFactorQrCode: ShowTwoFactorQrCode,
-              showBackupCodes: ShowBackupCodes,
-              totpVerification: TotpVerification,
-            }}
-          >
-            <Notifications />
-            <Header />
-            {children}
-          </ModalsProvider>
-        </MantineProvider>
-      </body>
-    </html>
-  );
+	return (
+		<html
+			lang="en"
+			{...mantineHtmlProps}
+			className={`${GeistSans.variable} ${GeistMono.variable}`}
+		>
+			<head>
+				<ColorSchemeScript />
+			</head>
+			<body className="antialiased">
+				<MantineProvider defaultColorScheme="dark" theme={theme}>
+					<ModalsProvider
+						modals={{
+							enable2fa: Enable2Fa,
+							editUser: EditUser,
+							changePassword: ChangePassword,
+							showTwoFactorQrCode: ShowTwoFactorQrCode,
+							showBackupCodes: ShowBackupCodes,
+							totpVerification: TotpVerification,
+						}}
+					>
+						<Notifications />
+						<Header />
+						{children}
+					</ModalsProvider>
+				</MantineProvider>
+			</body>
+		</html>
+	);
 }
