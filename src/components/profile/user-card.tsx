@@ -13,16 +13,15 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { UAParser } from "ua-parser-js";
 
+import { LoaderSkeleton } from "@/components/loader-skeleton";
 import { authClient } from "@/lib/auth-client";
 import { Session } from "@/lib/auth-schema";
 import { openTypedContextModal } from "@/lib/modal-helper";
-import { LoaderSkeleton } from "@/components/loader-skeleton";
 
 interface Props {
   session: Session | null;

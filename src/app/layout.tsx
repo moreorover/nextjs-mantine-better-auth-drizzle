@@ -15,11 +15,11 @@ import { Header } from "@/components/header";
 import { ChangePassword } from "@/components/profile/change-password";
 import { EditUser } from "@/components/profile/edit-user";
 import { Enable2Fa } from "@/components/profile/enable-2fa-modal";
-
-import theme from "./theme";
 import { ShowTwoFactorQrCode } from "@/components/profile/show-2fa-modal";
 import { ShowBackupCodes } from "@/components/profile/show-backup-codes";
 import { TotpVerification } from "@/components/profile/totp-verification";
+
+import theme from "./theme";
 
 export const metadata: Metadata = {
   title: "Prive Video",

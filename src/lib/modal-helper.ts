@@ -1,4 +1,5 @@
 import { ContextModalProps, modals } from "@mantine/modals";
+
 import { Session } from "@/lib/auth-schema";
 
 export type ModalNames =

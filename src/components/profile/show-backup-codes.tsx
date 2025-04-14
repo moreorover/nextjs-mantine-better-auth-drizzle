@@ -10,6 +10,7 @@ import {
   Text,
 } from "@mantine/core";
 import { useState } from "react";
+
 import { getBackupCodes } from "@/actions/getBackupCodes";
 import { TypedContextModalProps } from "@/lib/modal-helper";
 
