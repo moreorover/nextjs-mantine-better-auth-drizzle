@@ -1,15 +1,50 @@
 "use client";
 
 import { Button, Container, Stack, Text, TextInput } from "@mantine/core";
-import { ContextModalProps } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 
 import { authClient } from "@/lib/auth-client";
+import { TypedContextModalProps } from "@/lib/modal-helper";
 
-export const TotpVerification = ({ context, id }: ContextModalProps) => {
+export const TotpVerification = ({
+  context,
+  id,
+  innerProps,
+}: TypedContextModalProps<"totpVerification">) => {
   const [isPendingTwoFa, setIsPendingTwoFa] = useState<boolean>(false);
   const [twoFaPassword, setTwoFaPassword] = useState<string>("");
+
+  const handleVerify = async () => {
+    await authClient.twoFactor.verifyTotp({
+      code: twoFaPassword,
+      trustDevice: true,
+      fetchOptions: {
+        onError() {
+          setIsPendingTwoFa(false);
+          setTwoFaPassword("");
+          notifications.show({
+            color: "red",
+            title: "Failed",
+            message: "Invalid TOTP code",
+          });
+        },
+        onSuccess() {
+          notifications.show({
+            color: "green",
+            title: "Success",
+            message: "TOTP Verified",
+          });
+          setIsPendingTwoFa(false);
+          setTwoFaPassword("");
+          context.closeModal(id);
+          innerProps.onVerified();
+        },
+      },
+    });
+    setIsPendingTwoFa(false);
+    setTwoFaPassword("");
+  };
 
   return (
     <Container>
@@ -25,39 +60,7 @@ export const TotpVerification = ({ context, id }: ContextModalProps) => {
         <Button
           loading={isPendingTwoFa}
           disabled={isPendingTwoFa}
-          onClick={async () => {
-            await authClient.twoFactor.verifyTotp({
-              code: twoFaPassword,
-              trustDevice: true,
-              fetchOptions: {
-                onError() {
-                  setIsPendingTwoFa(false);
-                  setTwoFaPassword("");
-                  notifications.show({
-                    color: "red",
-                    title: "Failed",
-                    message: "Invalid TOTP code",
-                  });
-                },
-                onSuccess() {
-                  notifications.show({
-                    color: "green",
-                    title: "Success",
-                    message: "TOTP Verified",
-                  });
-                  setIsPendingTwoFa(false);
-                  setTwoFaPassword("");
-                  context.closeModal(id);
-                  context.openContextModal("showBackupCodes", {
-                    title: "Show Backup Codes",
-                    innerProps: {},
-                  });
-                },
-              },
-            });
-            setIsPendingTwoFa(false);
-            setTwoFaPassword("");
-          }}
+          onClick={handleVerify}
         >
           Verify
         </Button>

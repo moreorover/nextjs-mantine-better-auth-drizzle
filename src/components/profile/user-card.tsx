@@ -209,7 +209,14 @@ export default function UserCard(props: Props) {
                 modals.openContextModal({
                   modal: "totpVerification",
                   title: "Verify TOTP",
-                  innerProps: {},
+                  innerProps: {
+                    onVerified: () =>
+                      modals.openContextModal({
+                        modal: "showBackupCodes",
+                        title: "Show Backup Codes",
+                        innerProps: {},
+                      }),
+                  },
                 })
               }
             >
