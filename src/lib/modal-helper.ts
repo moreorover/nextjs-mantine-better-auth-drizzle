@@ -2,9 +2,14 @@ import { modals } from "@mantine/modals";
 
 export type ModalNames = "totpVerification" | "showBackupCodes";
 
+export const modalTitles: Record<ModalNames, string> = {
+  totpVerification: "Verify TOTP",
+  showBackupCodes: "Your Backup Codes",
+};
+
 export interface ModalPropsMap {
   totpVerification: {
-    onVerified?: () => void;
+    onVerified: () => void;
   };
   showBackupCodes: object;
 }
@@ -12,13 +17,13 @@ export interface ModalPropsMap {
 export function openTypedContextModal<N extends ModalNames>(
   name: N,
   options: {
-    title: string;
+    title?: string;
     innerProps: ModalPropsMap[N];
   },
 ) {
   modals.openContextModal({
     modal: name,
-    title: options.title,
+    title: options.title ?? modalTitles[name],
     innerProps: options.innerProps,
   });
 }

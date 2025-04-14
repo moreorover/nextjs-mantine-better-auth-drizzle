@@ -208,11 +208,9 @@ export default function UserCard(props: Props) {
               variant="default"
               onClick={() =>
                 openTypedContextModal("totpVerification", {
-                  title: "Verify TOTP",
                   innerProps: {
                     onVerified: () =>
                       openTypedContextModal("showBackupCodes", {
-                        title: "Show Backup Codes",
                         innerProps: {},
                       }),
                   },
