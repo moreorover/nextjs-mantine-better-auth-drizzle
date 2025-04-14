@@ -97,7 +97,7 @@ export function Header() {
               <ScrollArea h="calc(100vh - 80px" mx="-md">
                 <Stack justify="space-between">
                   <Divider my="sm" />
-                  <>{...items}</>
+                  {...items}
                   <Divider my="sm" />
                   <HeaderAuth />
                   <ActionIcon

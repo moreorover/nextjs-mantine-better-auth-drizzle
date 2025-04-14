@@ -20,7 +20,8 @@ import { UAParser } from "ua-parser-js";
 
 import { LoaderSkeleton } from "@/components/loader-skeleton";
 import { authClient } from "@/lib/auth-client";
-import { Session } from "@/lib/auth-schema";
+import type { Session } from "@/lib/auth-schema";
+
 import { openTypedContextModal } from "@/lib/modal-helper";
 
 interface Props {
