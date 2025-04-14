@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": []
+    "ignore": ["./src/app/theme.css", "./src/components/header-auth.module.css"]
   },
   "formatter": {
     "enabled": true,
