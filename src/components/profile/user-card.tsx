@@ -67,13 +67,22 @@ export default function UserCard(props: Props) {
                 Edit
               </Button>
               <Button
-                onClick={() =>
-                  modals.openContextModal({
-                    modal: "changePassword",
-                    title: "Change Password",
-                    innerProps: {},
-                  })
-                }
+                onClick={() => {
+                  if (session?.user.twoFactorEnabled) {
+                    openTypedContextModal("totpVerification", {
+                      innerProps: {
+                        onVerified: () =>
+                          openTypedContextModal("changePassword", {
+                            innerProps: {},
+                          }),
+                      },
+                    });
+                  } else {
+                    openTypedContextModal("changePassword", {
+                      innerProps: {},
+                    });
+                  }
+                }}
               >
                 Change Password
               </Button>
@@ -263,17 +272,25 @@ export default function UserCard(props: Props) {
               )
             }
             variant="default"
-            onClick={() =>
-              modals.openContextModal({
-                modal: "enable2fa",
-                title: session?.user.twoFactorEnabled
-                  ? "Disable 2FA"
-                  : "Enable 2FA",
-                innerProps: {
-                  session,
-                },
-              })
-            }
+            onClick={() => {
+              if (session?.user.twoFactorEnabled) {
+                openTypedContextModal("totpVerification", {
+                  innerProps: {
+                    onVerified: () => {
+                      openTypedContextModal("enable2fa", {
+                        title: "Disable 2FA",
+                        innerProps: { session },
+                      });
+                    },
+                  },
+                });
+              } else {
+                openTypedContextModal("enable2fa", {
+                  title: "Enable 2FA",
+                  innerProps: { session },
+                });
+              }
+            }}
           >
             {session?.user.twoFactorEnabled ? "Disable 2FA" : "Enable 2FA"}
           </Button>
