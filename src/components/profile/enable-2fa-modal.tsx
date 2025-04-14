@@ -11,21 +11,18 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { ContextModalProps } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 import QRCode from "react-qr-code";
 
 import { authClient } from "@/lib/auth-client";
-import { Session } from "@/lib/auth-schema";
+import { TypedContextModalProps } from "@/lib/modal-helper";
 
 export const Enable2Fa = ({
   context,
   id,
   innerProps,
-}: ContextModalProps<{
-  session: Session;
-}>) => {
+}: TypedContextModalProps<"enable2fa">) => {
   const [isPendingTwoFa, setIsPendingTwoFa] = useState<boolean>(false);
   const [twoFaPassword, setTwoFaPassword] = useState<string>("");
   const [twoFactorVerifyURI, setTwoFactorVerifyURI] = useState<string>("");

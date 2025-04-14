@@ -9,11 +9,14 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import { ContextModalProps } from "@mantine/modals";
 import { useState } from "react";
 import { getBackupCodes } from "@/actions/getBackupCodes";
+import { TypedContextModalProps } from "@/lib/modal-helper";
 
-export const ShowBackupCodes = ({ context, id }: ContextModalProps) => {
+export const ShowBackupCodes = ({
+  context,
+  id,
+}: TypedContextModalProps<"showBackupCodes">) => {
   const [codes, setcodes] = useState<{
     status: boolean;
     backupCodes: string[];

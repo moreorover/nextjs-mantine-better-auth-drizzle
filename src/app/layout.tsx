@@ -17,7 +17,7 @@ import { EditUser } from "@/components/profile/edit-user";
 import { Enable2Fa } from "@/components/profile/enable-2fa-modal";
 
 import theme from "./theme";
-import { Show2Fa } from "@/components/profile/show-2fa-modal";
+import { ShowTwoFactorQrCode } from "@/components/profile/show-2fa-modal";
 import { ShowBackupCodes } from "@/components/profile/show-backup-codes";
 import { TotpVerification } from "@/components/profile/totp-verification";
 
@@ -47,7 +47,7 @@ export default function RootLayout({
               enable2fa: Enable2Fa,
               editUser: EditUser,
               changePassword: ChangePassword,
-              showTwoFactorQrCode: Show2Fa,
+              showTwoFactorQrCode: ShowTwoFactorQrCode,
               showBackupCodes: ShowBackupCodes,
               totpVerification: TotpVerification,
             }}

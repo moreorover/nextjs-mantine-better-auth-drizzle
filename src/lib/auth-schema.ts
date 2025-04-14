@@ -59,3 +59,7 @@ export const resetPasswordSchema = z
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
+
+export const editUserSchema = z.object({
+  fullName: z.string().min(1, "Full name is required."),
+});

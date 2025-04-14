@@ -2,21 +2,19 @@
 
 import { Button, Container, Stack, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { ContextModalProps } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { useState } from "react";
-import { z } from "zod";
 
 import { authClient } from "@/lib/auth-client";
+import { editUserSchema } from "@/lib/auth-schema";
+import { TypedContextModalProps } from "@/lib/modal-helper";
 
 export const EditUser = ({
   context,
   id,
   innerProps,
-}: ContextModalProps<{
-  fullName: string;
-}>) => {
+}: TypedContextModalProps<"editUser">) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm({
@@ -24,9 +22,7 @@ export const EditUser = ({
     initialValues: {
       fullName: "",
     },
-    validate: zodResolver(
-      z.object({ fullName: z.string().min(1, "Full name is required.") }),
-    ),
+    validate: zodResolver(editUserSchema),
   });
 
   async function handleSubmit(values: typeof form.values) {

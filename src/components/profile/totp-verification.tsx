@@ -5,6 +5,7 @@ import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 
 import { authClient } from "@/lib/auth-client";
+import { TypedContextModalProps } from "@/lib/modal-helper";
 
 export const TotpVerification = ({
   context,

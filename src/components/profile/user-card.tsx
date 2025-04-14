@@ -22,6 +22,7 @@ import { UAParser } from "ua-parser-js";
 import { authClient } from "@/lib/auth-client";
 import { Session } from "@/lib/auth-schema";
 import { openTypedContextModal } from "@/lib/modal-helper";
+import { LoaderSkeleton } from "@/components/loader-skeleton";
 
 interface Props {
   session: Session | null;
@@ -35,6 +36,11 @@ export default function UserCard(props: Props) {
   const session = data || props.session;
   const [emailVerificationPending, setEmailVerificationPending] =
     useState<boolean>(false);
+
+  if (!session) {
+    return <LoaderSkeleton />;
+  }
+
   return (
     <Container size={"xs"} py={12}>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -55,12 +61,8 @@ export default function UserCard(props: Props) {
             <Group gap="sm">
               <Button
                 onClick={() =>
-                  modals.openContextModal({
-                    modal: "editUser",
-                    title: "Edit User",
-                    innerProps: {
-                      fullName: session?.user.name,
-                    },
+                  openTypedContextModal("editUser", {
+                    innerProps: { fullName: session.user.name },
                   })
                 }
               >
@@ -242,11 +244,7 @@ export default function UserCard(props: Props) {
               }
               variant="default"
               onClick={() =>
-                modals.openContextModal({
-                  modal: "showTwoFactorQrCode",
-                  title: "Scan QR Code",
-                  innerProps: {},
-                })
+                openTypedContextModal("showTwoFactorQrCode", { innerProps: {} })
               }
             >
               Scan QR Code

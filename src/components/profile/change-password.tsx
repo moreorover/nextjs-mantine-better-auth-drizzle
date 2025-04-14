@@ -9,15 +9,18 @@ import {
   Text,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { ContextModalProps } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { useState } from "react";
 
 import { authClient } from "@/lib/auth-client";
 import { changePasswordSchema } from "@/lib/auth-schema";
+import { TypedContextModalProps } from "@/lib/modal-helper";
 
-export const ChangePassword = ({ context, id }: ContextModalProps) => {
+export const ChangePassword = ({
+  context,
+  id,
+}: TypedContextModalProps<"changePassword">) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm({

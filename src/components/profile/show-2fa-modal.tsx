@@ -10,13 +10,16 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import { ContextModalProps } from "@mantine/modals";
 import { useState } from "react";
 import QRCode from "react-qr-code";
 
 import { authClient } from "@/lib/auth-client";
+import { TypedContextModalProps } from "@/lib/modal-helper";
 
-export const Show2Fa = ({ context, id }: ContextModalProps) => {
+export const ShowTwoFactorQrCode = ({
+  context,
+  id,
+}: TypedContextModalProps<"showTwoFactorQrCode">) => {
   const [twoFaPassword, setTwoFaPassword] = useState<string>("");
   const [twoFactorVerifyURI, setTwoFactorVerifyURI] = useState<string>("");
 
