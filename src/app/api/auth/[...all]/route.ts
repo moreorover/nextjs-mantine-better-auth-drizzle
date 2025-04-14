@@ -18,7 +18,7 @@
 // export const POST = withLogging(authHandler.POST);
 
 import { toNextJsHandler } from "better-auth/next-js";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
 import { auth } from "@/lib/auth";
 

@@ -22,7 +22,7 @@ export const ResetPasswordEmail = ({
 	username,
 	resetLink,
 }: BetterAuthResetPasswordEmailProps) => {
-	const previewText = `Reset your BetterAuth password`;
+	const previewText = "Reset your BetterAuth password";
 	return (
 		<Html>
 			<Head />

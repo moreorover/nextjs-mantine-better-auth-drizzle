@@ -15,7 +15,7 @@ import { useState } from "react";
 
 import { authClient } from "@/lib/auth-client";
 import { changePasswordSchema } from "@/lib/auth-schema";
-import { TypedContextModalProps } from "@/lib/modal-helper";
+import type { TypedContextModalProps } from "@/lib/modal-helper";
 
 export const ChangePassword = ({
 	context,

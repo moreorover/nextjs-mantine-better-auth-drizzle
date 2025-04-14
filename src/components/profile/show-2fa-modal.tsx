@@ -14,7 +14,7 @@ import { useState } from "react";
 import QRCode from "react-qr-code";
 
 import { authClient } from "@/lib/auth-client";
-import { TypedContextModalProps } from "@/lib/modal-helper";
+import type { TypedContextModalProps } from "@/lib/modal-helper";
 
 export const ShowTwoFactorQrCode = ({
 	context,

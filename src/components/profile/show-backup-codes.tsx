@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 
 import { getBackupCodes } from "@/actions/getBackupCodes";
-import { TypedContextModalProps } from "@/lib/modal-helper";
+import type { TypedContextModalProps } from "@/lib/modal-helper";
 
 export const ShowBackupCodes = ({
 	context,
@@ -36,8 +36,8 @@ export const ShowBackupCodes = ({
 			<Stack gap="sm">
 				<Text size="sm">Available backup codes</Text>
 				<Grid gutter="sm">
-					{codes?.backupCodes.map((code, index) => (
-						<Grid.Col span={{ base: 12, sm: 6 }} key={index}>
+					{codes?.backupCodes.map((code) => (
+						<Grid.Col span={{ base: 12, sm: 6 }} key={code}>
 							<Code block p="xs" fw={500}>
 								{code}
 							</Code>
@@ -57,7 +57,7 @@ export const ShowBackupCodes = ({
 					variant="secondary"
 					onClick={fetchCodes}
 					loading={fetching}
-					disabled={!!(codes && codes.status && codes.backupCodes.length > 0)}
+					disabled={!!(codes?.status && codes?.backupCodes?.length > 0)}
 				>
 					Show Backup Codes
 				</Button>

@@ -1,7 +1,7 @@
 import {
 	ColorSchemeScript,
-	mantineHtmlProps,
 	MantineProvider,
+	mantineHtmlProps,
 } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
@@ -9,7 +9,7 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 
-import "./globals.css";
+import "@/app/globals.css";
 import "@mantine/notifications/styles.css";
 import { Header } from "@/components/header";
 import { ChangePassword } from "@/components/profile/change-password";
@@ -19,7 +19,7 @@ import { ShowTwoFactorQrCode } from "@/components/profile/show-2fa-modal";
 import { ShowBackupCodes } from "@/components/profile/show-backup-codes";
 import { TotpVerification } from "@/components/profile/totp-verification";
 
-import theme from "./theme";
+import theme from "@/app/theme";
 
 export const metadata: Metadata = {
 	title: "Prive Video",
