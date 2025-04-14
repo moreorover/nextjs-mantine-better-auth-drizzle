@@ -29,8 +29,7 @@ export default function SignIn() {
 
 	async function handleSubmit(values: typeof form.values) {
 		const { email, password, rememberMe } = values;
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { data, error } = await authClient.signIn.email(
+		await authClient.signIn.email(
 			{
 				email,
 				password,
@@ -46,8 +45,7 @@ export default function SignIn() {
 				onSuccess: () => {
 					form.reset();
 				},
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				onError: (ctx) => {
+				onError: () => {
 					notifications.show({
 						color: "red",
 						title: "Sign In Failed",
