@@ -102,8 +102,8 @@ export default function UserCard(props: Props) {
 						>
 							<Stack>
 								Please verify your email address. Check your inbox for the
-								verification email. If you haven&#39;t received the email, click
-								the button below to resend.
+								verification email. If you haven't received the email, click the
+								button below to resend.
 								<Button
 									loading={emailVerificationPending}
 									variant="outline"

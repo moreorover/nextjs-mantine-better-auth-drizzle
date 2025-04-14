@@ -38,6 +38,10 @@ export const forgotPasswordSchema = z.object({
 	email: z.string().email("Invalid email address"),
 });
 
+export const backupCodeSchema = z.object({
+	code: z.string(),
+});
+
 export const changePasswordSchema = z
 	.object({
 		currentPassword: z.string(),

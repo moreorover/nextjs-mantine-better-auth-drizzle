@@ -1,6 +1,15 @@
 "use client";
 
-import { Button, Card, Container, PinInput, Stack, Text } from "@mantine/core";
+import {
+	Anchor,
+	Button,
+	Card,
+	Container,
+	Group,
+	PinInput,
+	Stack,
+	Text,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { zodResolver } from "mantine-form-zod-resolver";
@@ -62,6 +71,11 @@ export default function Page() {
 							key={form.key("totp")}
 							{...form.getInputProps("totp")}
 						/>
+						<Group>
+							<Anchor size="sm" href="/backup-code">
+								Can't access your 2FA?
+							</Anchor>
+						</Group>
 						<Button fullWidth mt="xl" type="submit">
 							Verify
 						</Button>

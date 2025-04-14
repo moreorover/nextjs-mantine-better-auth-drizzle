@@ -58,7 +58,7 @@ export default function Page() {
 					<Stack>
 						<Text fw={500}>Check your email</Text>
 						<Text size="xs">
-							We&#39;ve sent a password reset link to your email.
+							We've sent a password reset link to your email.
 						</Text>
 						<Alert
 							variant="light"
@@ -73,7 +73,7 @@ export default function Page() {
 								/>
 							}
 						>
-							If you don&#39;t see the email, check your spam folder.
+							If you don't see the email, check your spam folder.
 						</Alert>
 						<Button
 							variant="outline"
