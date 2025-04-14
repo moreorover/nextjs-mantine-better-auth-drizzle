@@ -1,16 +1,24 @@
-import { ContextModalProps } from "@mantine/modals";
+import { modals } from "@mantine/modals";
 
-export type ModalNames = "totpVerification" | "finalConfirmation";
+export type ModalNames = "totpVerification" | "showBackupCodes";
 
 export interface ModalPropsMap {
   totpVerification: {
-    onVerified: () => void;
+    onVerified?: () => void;
   };
-  finalConfirmation: {
-    userId: string;
-  };
+  showBackupCodes: object;
 }
 
-export type TypedContextModalProps<K extends ModalNames> = ContextModalProps<
-  ModalPropsMap[K]
->;
+export function openTypedContextModal<N extends ModalNames>(
+  name: N,
+  options: {
+    title: string;
+    innerProps: ModalPropsMap[N];
+  },
+) {
+  modals.openContextModal({
+    modal: name,
+    title: options.title,
+    innerProps: options.innerProps,
+  });
+}

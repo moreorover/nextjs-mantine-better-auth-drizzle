@@ -21,6 +21,7 @@ import { UAParser } from "ua-parser-js";
 
 import { authClient } from "@/lib/auth-client";
 import { Session } from "@/lib/auth-schema";
+import { openTypedContextModal } from "@/lib/modal-helper";
 
 interface Props {
   session: Session | null;
@@ -206,13 +207,11 @@ export default function UserCard(props: Props) {
               }
               variant="default"
               onClick={() =>
-                modals.openContextModal({
-                  modal: "totpVerification",
+                openTypedContextModal("totpVerification", {
                   title: "Verify TOTP",
                   innerProps: {
                     onVerified: () =>
-                      modals.openContextModal({
-                        modal: "showBackupCodes",
+                      openTypedContextModal("showBackupCodes", {
                         title: "Show Backup Codes",
                         innerProps: {},
                       }),
