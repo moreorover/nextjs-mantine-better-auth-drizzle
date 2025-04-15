@@ -29,8 +29,7 @@ export default function Page() {
 
 	async function handleSubmit(values: typeof form.values) {
 		const { totp } = values;
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { data, error } = await authClient.twoFactor.verifyTotp(
+		await authClient.twoFactor.verifyTotp(
 			{
 				code: totp,
 				trustDevice: true,
@@ -46,7 +45,7 @@ export default function Page() {
 					redirect("/profile");
 				},
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				onError: (ctx) => {
+				onError: () => {
 					notifications.show({
 						color: "red",
 						title: "Sign In Failed",

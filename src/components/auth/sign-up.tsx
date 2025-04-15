@@ -29,8 +29,7 @@ export default function SignUp() {
 
 	async function handleSubmit(values: typeof form.values) {
 		const { firstName, lastName, email, password } = values;
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { data, error } = await authClient.signUp.email(
+		await authClient.signUp.email(
 			{
 				name: `${firstName} ${lastName}`,
 				email,

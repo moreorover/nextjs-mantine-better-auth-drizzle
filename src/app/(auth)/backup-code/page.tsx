@@ -35,6 +35,7 @@ export default function Page() {
 					//redirect the user on success
 					router.replace("/profile");
 				},
+				// biome-ignore lint/correctness/noUnusedVariables: <explanation>
 				onError(ctx) {
 					notifications.show({
 						color: "red",
