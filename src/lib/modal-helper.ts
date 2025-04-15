@@ -9,7 +9,8 @@ export type ModalNames =
 	| "enable2fa"
 	| "editUser"
 	| "showTwoFactorQrCode"
-	| "generateBackupCodes";
+	| "generateBackupCodes"
+	| "createUser";
 
 export const modalTitles: Record<ModalNames, string> = {
 	totpVerification: "Verify TOTP",
@@ -19,6 +20,7 @@ export const modalTitles: Record<ModalNames, string> = {
 	editUser: "Edit User",
 	showTwoFactorQrCode: "Show Two Factor QrCode",
 	generateBackupCodes: "Generate New Backup Codes",
+	createUser: "Create User",
 };
 
 export interface ModalPropsMap {
@@ -31,6 +33,7 @@ export interface ModalPropsMap {
 	editUser: { fullName: string };
 	showTwoFactorQrCode: object;
 	generateBackupCodes: object;
+	createUser: { onCreated: () => void };
 }
 
 export type TypedContextModalProps<K extends ModalNames> = ContextModalProps<
@@ -42,11 +45,13 @@ export function openTypedContextModal<N extends ModalNames>(
 	options: {
 		title?: string;
 		innerProps: ModalPropsMap[N];
+		onClose?: () => void;
 	},
 ) {
 	modals.openContextModal({
 		modal: name,
 		title: options.title ?? modalTitles[name],
 		innerProps: options.innerProps,
+		onClose: options.onClose,
 	});
 }

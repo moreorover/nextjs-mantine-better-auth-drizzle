@@ -1,6 +1,7 @@
 "use client";
 import { LoaderSkeleton } from "@/components/loader-skeleton";
 import { authClient } from "@/lib/auth-client";
+import { openTypedContextModal } from "@/lib/modal-helper";
 import { Icon } from "@iconify/react";
 import {
 	ActionIcon,
@@ -18,13 +19,13 @@ import {
 	Title,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const AdminView = () => {
 	const router = useRouter();
-	// const queryClient = useQueryClient();
+	const queryClient = useQueryClient();
 	const [isLoading, setIsLoading] = useState<string | undefined>();
 	const { data: users, isLoading: isUsersLoading } = useQuery({
 		queryKey: ["users"],
@@ -44,6 +45,36 @@ export const AdminView = () => {
 			return data?.users || [];
 		},
 	});
+
+	const handleCreateUser = async () => {
+		setIsLoading("create");
+		let wasVerified = false;
+		openTypedContextModal("totpVerification", {
+			innerProps: {
+				onVerified: () => {
+					wasVerified = true;
+					openTypedContextModal("createUser", {
+						innerProps: {
+							onCreated: () => {
+								setIsLoading(undefined);
+								queryClient.invalidateQueries({
+									queryKey: ["users"],
+								});
+							},
+						},
+						onClose: () => {
+							setTimeout(() => setIsLoading(undefined), 0);
+						},
+					});
+				},
+			},
+			onClose: () => {
+				if (!wasVerified) {
+					setTimeout(() => setIsLoading(undefined), 0);
+				}
+			},
+		});
+	};
 
 	const handleRevokeSessions = async (id: string) => {
 		setIsLoading(`revoke-${id}`);
@@ -122,9 +153,9 @@ export const AdminView = () => {
 			</Table.Td>
 			<Table.Td>
 				<Group gap={0} justify="flex-end">
-					<ActionIcon variant="subtle" color="gray">
-						<Icon icon={"lucide:pencil"} height={16} width={16} />
-					</ActionIcon>
+					{/*<ActionIcon variant="subtle" color="gray">*/}
+					{/*	<Icon icon={"lucide:pencil"} height={16} width={16} />*/}
+					{/*</ActionIcon>*/}
 					<Menu
 						transitionProps={{ transition: "pop" }}
 						withArrow
@@ -186,8 +217,10 @@ export const AdminView = () => {
 					<Group justify="space-between">
 						<Title order={3}>Users</Title>
 						<Button
+							loading={isLoading === "create"}
 							disabled={isUsersLoading}
 							leftSection={<Icon icon={"lucide:plus"} />}
+							onClick={handleCreateUser}
 						>
 							Create User
 						</Button>

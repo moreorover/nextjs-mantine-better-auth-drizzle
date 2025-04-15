@@ -4,7 +4,7 @@ export const LoaderSkeleton = () => {
 	return (
 		<>
 			<Center>
-				<Loader color="blue" type="dots" />
+				<Loader type="dots" />
 			</Center>
 		</>
 	);

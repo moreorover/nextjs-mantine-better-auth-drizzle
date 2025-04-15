@@ -1,19 +1,29 @@
+"use client";
+
 import {
 	Button,
-	Card,
 	Container,
 	PasswordInput,
+	Stack,
 	Text,
 	TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { notifications } from "@mantine/notifications";
 import { zodResolver } from "mantine-form-zod-resolver";
+import { useState } from "react";
 
 import { authClient } from "@/lib/auth-client";
 import { signUpSchema } from "@/lib/auth-schema";
+import type { TypedContextModalProps } from "@/lib/modal-helper";
+import { notifications } from "@mantine/notifications";
 
-export default function SignUp() {
+export const CreateUser = ({
+	context,
+	id,
+	innerProps,
+}: TypedContextModalProps<"createUser">) => {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
 	const form = useForm({
 		mode: "uncontrolled",
 		initialValues: {
@@ -23,46 +33,45 @@ export default function SignUp() {
 			password: "",
 			confirmPassword: "",
 		},
-
 		validate: zodResolver(signUpSchema),
 	});
 
 	async function handleSubmit(values: typeof form.values) {
 		const { firstName, lastName, email, password } = values;
-		await authClient.signUp.email(
+		setIsLoading(true);
+		await authClient.admin.createUser(
 			{
 				name: `${firstName} ${lastName}`,
 				email,
 				password,
-				callbackURL: "/features",
+				role: "user",
 			},
 			{
-				onRequest: () => {
-					// toast({
-					//   title: "Please wait...",
-					// });
-				},
 				onSuccess: () => {
-					form.reset();
+					notifications.show({
+						color: "teal",
+						title: "Success",
+						message: "User created",
+					});
+					innerProps.onCreated();
+					context.closeModal(id);
 				},
-
-				onError: (ctx) => {
-					console.log(ctx);
+				onError: (err) => {
 					notifications.show({
 						color: "red",
-						title: "Sign Up Failed",
-						message: "Please make sure your email and password is correct.",
+						title: "Failed",
+						message: err.error.message,
 					});
 				},
 			},
 		);
+		setIsLoading(false);
 	}
 
 	return (
-		<Container py={12}>
-			<Card shadow="sm" padding="lg" radius="md" withBorder>
-				<Text fw={500}>Sign Up</Text>
-				<Text size="xs">Enter your information to create an account</Text>
+		<Container>
+			<Stack gap="sm">
+				<Text size="xs">Edit user information</Text>
 				<form onSubmit={form.onSubmit(handleSubmit)}>
 					<TextInput
 						label="First Name"
@@ -111,11 +120,14 @@ export default function SignUp() {
 						key={form.key("confirmPassword")}
 						{...form.getInputProps("confirmPassword")}
 					/>
-					<Button fullWidth mt="xl" type="submit">
-						Sign Up
+					<Button disabled={isLoading} fullWidth mt="xl" type="submit">
+						Create
 					</Button>
 				</form>
-			</Card>
+				<Button fullWidth mt="md" onClick={() => context.closeModal(id)}>
+					Cancel
+				</Button>
+			</Stack>
 		</Container>
 	);
-}
+};

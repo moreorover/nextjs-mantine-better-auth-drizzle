@@ -22,6 +22,7 @@ import { WrapperWithQuery } from "@/components/wrapper";
 import "@/app/globals.css";
 import theme from "@/app/theme";
 import "@mantine/notifications/styles.css";
+import { CreateUser } from "@/components/profile/create-user-modal";
 
 export const metadata: Metadata = {
 	title: "Prive Video",
@@ -53,6 +54,7 @@ export default function RootLayout({
 							showBackupCodes: ShowBackupCodes,
 							totpVerification: TotpVerification,
 							generateBackupCodes: GenerateBackupCodes,
+							createUser: CreateUser,
 						}}
 					>
 						<Notifications />
