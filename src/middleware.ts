@@ -5,6 +5,10 @@ export async function middleware(request: NextRequest) {
 	const url = new URL(request.url);
 	// Handle /two-factor access
 	if (url.pathname === "/two-factor" || url.pathname === "/backup-code") {
+		const sessionTokenCookie = request.cookies.get("better-auth.session_token");
+		if (sessionTokenCookie) {
+			return NextResponse.redirect(new URL("/profile", request.url));
+		}
 		const twoFactorCookie = request.cookies.get("better-auth.two_factor");
 		if (!twoFactorCookie) {
 			return NextResponse.redirect(new URL("/sign-in", request.url));

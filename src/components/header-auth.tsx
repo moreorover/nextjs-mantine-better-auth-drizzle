@@ -7,13 +7,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import classes from "@/components/header-auth.module.css";
+import { LoaderSkeleton } from "@/components/loader-skeleton";
 import { authClient } from "@/lib/auth-client";
 
 export function HeaderAuth() {
 	const router = useRouter();
 	const { data, isPending } = authClient.useSession();
 
-	if (isPending) return <div>Loading...</div>;
+	if (isPending) return <LoaderSkeleton />;
 
 	if (!data?.user)
 		return (

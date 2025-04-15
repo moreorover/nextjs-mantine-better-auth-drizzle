@@ -13,12 +13,13 @@ import {
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { zodResolver } from "mantine-form-zod-resolver";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { authClient } from "@/lib/auth-client";
 import { twoFactorSchema } from "@/lib/auth-schema";
 
 export default function Page() {
+	const router = useRouter();
 	const form = useForm({
 		mode: "uncontrolled",
 		initialValues: {
@@ -42,9 +43,8 @@ export default function Page() {
 				},
 				onSuccess: () => {
 					form.reset();
-					redirect("/profile");
+					router.push("/profile");
 				},
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				onError: () => {
 					notifications.show({
 						color: "red",
