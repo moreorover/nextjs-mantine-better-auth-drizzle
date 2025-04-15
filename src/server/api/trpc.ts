@@ -9,7 +9,6 @@
 
 import { auth } from "@/lib/auth";
 import { TRPCError, initTRPC } from "@trpc/server";
-import { headers } from "next/headers";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
@@ -25,9 +24,9 @@ import { ZodError } from "zod";
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async () => {
+export const createTRPCContext = async (opts: { headers: Headers }) => {
 	const session = await auth.api.getSession({
-		headers: await headers(),
+		headers: opts.headers,
 	});
 
 	return { session };

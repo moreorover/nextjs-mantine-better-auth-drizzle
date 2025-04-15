@@ -13,6 +13,8 @@ import {
 } from "@/db/schema";
 import { resend } from "@/lib/email/resend";
 import { reactResetPasswordEmail } from "@/lib/email/reset-password";
+import { headers } from "next/headers";
+import { cache } from "react";
 
 const from = process.env.BETTER_AUTH_EMAIL || "delivered@resend.dev";
 
@@ -55,4 +57,10 @@ export const auth = betterAuth({
 		},
 	},
 	plugins: [admin(), twoFactor(), nextCookies()], // make sure nextCookies is the last plugin in the array
+});
+
+export const getSession = cache(async () => {
+	return await auth.api.getSession({
+		headers: await headers(),
+	});
 });

@@ -1,12 +1,9 @@
-import { auth } from "@/lib/auth";
+import { getSession } from "@/lib/auth";
 import { AdminView } from "@/modules/admin/ui/views/admin-view";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
-	const session = await auth.api.getSession({
-		headers: await headers(),
-	});
+	const session = await getSession();
 
 	if (!session) {
 		redirect("/sign-in");

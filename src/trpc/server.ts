@@ -6,6 +6,7 @@ import { cache } from "react";
 import { createCaller } from "@/server/api/root";
 import { createTRPCContext } from "@/server/api/trpc";
 import type { AppRouter } from "@/trpc/routers/_app";
+import { headers } from "next/headers";
 import { createQueryClient } from "./query-client";
 
 /**
@@ -13,7 +14,10 @@ import { createQueryClient } from "./query-client";
  * handling a tRPC call from a React Server Component.
  */
 const createContext = cache(async () => {
-	return createTRPCContext();
+	const headersList = await headers();
+	return createTRPCContext({
+		headers: headersList,
+	});
 });
 
 const getQueryClient = cache(createQueryClient);
