@@ -18,13 +18,13 @@ import {
 	Title,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const AdminView = () => {
 	const router = useRouter();
-	const queryClient = useQueryClient();
+	// const queryClient = useQueryClient();
 	const [isLoading, setIsLoading] = useState<string | undefined>();
 	const { data: users, isLoading: isUsersLoading } = useQuery({
 		queryKey: ["users"],

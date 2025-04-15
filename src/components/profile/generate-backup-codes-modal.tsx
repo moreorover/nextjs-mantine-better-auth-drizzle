@@ -65,10 +65,11 @@ export const GenerateBackupCodes = ({
 							loading={isGenerating}
 							onClick={async () => {
 								setIsGenerating(true);
-								const { data, error } =
-									await authClient.twoFactor.generateBackupCodes({
+								const { data } = await authClient.twoFactor.generateBackupCodes(
+									{
 										password: password,
-									});
+									},
+								);
 								setPassword("");
 								setIsGenerating(false);
 								data && setBackupCodes(data.backupCodes);
