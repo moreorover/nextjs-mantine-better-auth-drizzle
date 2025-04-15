@@ -76,6 +76,79 @@ export const AdminView = () => {
 		});
 	};
 
+	const handleBanUser = async (userId: string) => {
+		setIsLoading(`ban-${userId}`);
+		let wasVerified = false;
+		openTypedContextModal("totpVerification", {
+			innerProps: {
+				onVerified: () => {
+					wasVerified = true;
+					openTypedContextModal("banUser", {
+						innerProps: {
+							userId,
+							onBan: () => {
+								setIsLoading(undefined);
+								queryClient.invalidateQueries({
+									queryKey: ["users"],
+								});
+							},
+						},
+						onClose: () => {
+							setTimeout(() => setIsLoading(undefined), 0);
+						},
+					});
+				},
+			},
+			onClose: () => {
+				if (!wasVerified) {
+					setTimeout(() => setIsLoading(undefined), 0);
+				}
+			},
+		});
+	};
+
+	const handleUnbanUser = async (userId: string) => {
+		setIsLoading(`unban-${userId}`);
+		let wasVerified = false;
+		openTypedContextModal("totpVerification", {
+			innerProps: {
+				onVerified: async () => {
+					wasVerified = true;
+					await authClient.admin.unbanUser(
+						{
+							userId,
+						},
+						{
+							onSuccess: () => {
+								notifications.show({
+									color: "teal",
+									title: "Success",
+									message: "User unbanned",
+								});
+								queryClient.invalidateQueries({
+									queryKey: ["users"],
+								});
+							},
+							onError: (err) => {
+								notifications.show({
+									color: "red",
+									title: "Failed",
+									message: err.error.message,
+								});
+							},
+						},
+					);
+					setIsLoading(undefined);
+				},
+			},
+			onClose: () => {
+				if (!wasVerified) {
+					setTimeout(() => setIsLoading(undefined), 0);
+				}
+			},
+		});
+	};
+
 	const handleRevokeSessions = async (id: string) => {
 		setIsLoading(`revoke-${id}`);
 		try {
@@ -194,15 +267,30 @@ export const AdminView = () => {
 							>
 								Impersonate
 							</Menu.Item>
-							<Menu.Item
-								disabled={true}
-								leftSection={
-									<Icon icon={"lucide:trash"} height={16} width={16} />
-								}
-								color="red"
-							>
-								Ban User
-							</Menu.Item>
+							{!user.banned && (
+								<Menu.Item
+									onClick={() => handleBanUser(user.id)}
+									disabled={isLoading?.startsWith("ban")}
+									leftSection={
+										<Icon icon={"lucide:user-x"} height={16} width={16} />
+									}
+									color="red"
+								>
+									Ban User
+								</Menu.Item>
+							)}
+							{user.banned && (
+								<Menu.Item
+									onClick={() => handleUnbanUser(user.id)}
+									disabled={isLoading?.startsWith("unban")}
+									leftSection={
+										<Icon icon={"lucide:user-x"} height={16} width={16} />
+									}
+									color="violet"
+								>
+									Unban User
+								</Menu.Item>
+							)}
 						</Menu.Dropdown>
 					</Menu>
 				</Group>

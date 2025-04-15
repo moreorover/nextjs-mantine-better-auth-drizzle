@@ -22,6 +22,7 @@ import { WrapperWithQuery } from "@/components/wrapper";
 import "@/app/globals.css";
 import theme from "@/app/theme";
 import "@mantine/notifications/styles.css";
+import { BanUser } from "@/components/profile/ban-user-modal";
 import { CreateUser } from "@/components/profile/create-user-modal";
 
 export const metadata: Metadata = {
@@ -55,6 +56,7 @@ export default function RootLayout({
 							totpVerification: TotpVerification,
 							generateBackupCodes: GenerateBackupCodes,
 							createUser: CreateUser,
+							banUser: BanUser,
 						}}
 					>
 						<Notifications />

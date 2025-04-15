@@ -10,7 +10,8 @@ export type ModalNames =
 	| "editUser"
 	| "showTwoFactorQrCode"
 	| "generateBackupCodes"
-	| "createUser";
+	| "createUser"
+	| "banUser";
 
 export const modalTitles: Record<ModalNames, string> = {
 	totpVerification: "Verify TOTP",
@@ -21,6 +22,7 @@ export const modalTitles: Record<ModalNames, string> = {
 	showTwoFactorQrCode: "Show Two Factor QrCode",
 	generateBackupCodes: "Generate New Backup Codes",
 	createUser: "Create User",
+	banUser: "Ban User",
 };
 
 export interface ModalPropsMap {
@@ -34,6 +36,7 @@ export interface ModalPropsMap {
 	showTwoFactorQrCode: object;
 	generateBackupCodes: object;
 	createUser: { onCreated: () => void };
+	banUser: { userId: string; onBan?: () => void };
 }
 
 export type TypedContextModalProps<K extends ModalNames> = ContextModalProps<

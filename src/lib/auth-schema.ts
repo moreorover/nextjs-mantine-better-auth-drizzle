@@ -67,3 +67,7 @@ export const resetPasswordSchema = z
 export const editUserSchema = z.object({
 	fullName: z.string().min(1, "Full name is required."),
 });
+
+export const banUserSchema = z.object({
+	banReason: z.string().min(1, "BanReason is required."),
+});
