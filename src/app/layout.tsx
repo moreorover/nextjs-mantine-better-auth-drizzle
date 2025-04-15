@@ -24,6 +24,7 @@ import theme from "@/app/theme";
 import "@mantine/notifications/styles.css";
 import { BanUser } from "@/components/profile/ban-user-modal";
 import { CreateUser } from "@/components/profile/create-user-modal";
+import { TRPCReactProvider } from "@/trpc/react";
 
 export const metadata: Metadata = {
 	title: "Prive Video",
@@ -45,25 +46,27 @@ export default function RootLayout({
 				<ColorSchemeScript />
 			</head>
 			<body className="antialiased">
-				<MantineProvider defaultColorScheme="dark" theme={theme}>
-					<ModalsProvider
-						modals={{
-							enable2fa: Enable2Fa,
-							editUser: EditUser,
-							changePassword: ChangePassword,
-							showTwoFactorQrCode: ShowTwoFactorQrCode,
-							showBackupCodes: ShowBackupCodes,
-							totpVerification: TotpVerification,
-							generateBackupCodes: GenerateBackupCodes,
-							createUser: CreateUser,
-							banUser: BanUser,
-						}}
-					>
-						<Notifications />
-						<Header />
-						<WrapperWithQuery>{children}</WrapperWithQuery>
-					</ModalsProvider>
-				</MantineProvider>
+				<TRPCReactProvider>
+					<MantineProvider defaultColorScheme="dark" theme={theme}>
+						<ModalsProvider
+							modals={{
+								enable2fa: Enable2Fa,
+								editUser: EditUser,
+								changePassword: ChangePassword,
+								showTwoFactorQrCode: ShowTwoFactorQrCode,
+								showBackupCodes: ShowBackupCodes,
+								totpVerification: TotpVerification,
+								generateBackupCodes: GenerateBackupCodes,
+								createUser: CreateUser,
+								banUser: BanUser,
+							}}
+						>
+							<Notifications />
+							<Header />
+							<WrapperWithQuery>{children}</WrapperWithQuery>
+						</ModalsProvider>
+					</MantineProvider>
+				</TRPCReactProvider>
 			</body>
 		</html>
 	);

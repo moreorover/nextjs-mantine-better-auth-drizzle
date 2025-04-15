@@ -22,6 +22,10 @@
     "@neondatabase/serverless": "^1.0.0",
     "@react-email/components": "^0.0.36",
     "@tanstack/react-query": "^5.74.3",
+    "@trpc/client": "^11.1.0",
+    "@trpc/next": "^11.1.0",
+    "@trpc/react-query": "^11.1.0",
+    "@trpc/server": "^11.1.0",
     "better-auth": "^1.2.7",
     "dayjs": "^1.11.13",
     "dotenv": "^16.5.0",
@@ -35,6 +39,7 @@
     "react-error-boundary": "^5.0.0",
     "react-qr-code": "^2.0.15",
     "resend": "^4.2.0",
+    "superjson": "^2.2.2",
     "tailwind-preset-mantine": "^2.0.5",
     "ua-parser-js": "^2.0.3",
     "zod": "^3.24.2"

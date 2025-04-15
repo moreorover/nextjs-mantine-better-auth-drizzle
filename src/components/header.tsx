@@ -31,7 +31,11 @@ export function Header() {
 	const [opened, { toggle }] = useDisclosure(false);
 	const pathname = usePathname();
 
-	const logo = <Button>Logo</Button>;
+	const logo = (
+		<Button component={Link} href="/">
+			Logo
+		</Button>
+	);
 
 	const items = links.map((link) => (
 		<Link
