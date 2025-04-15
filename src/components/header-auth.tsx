@@ -1,7 +1,14 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { Button, Group, Menu, Text, UnstyledButton } from "@mantine/core";
+import {
+	Button,
+	Group,
+	Indicator,
+	Menu,
+	Text,
+	UnstyledButton,
+} from "@mantine/core";
 import cx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,14 +40,27 @@ export function HeaderAuth() {
 			</Button>
 			<Menu>
 				<Menu.Target>
-					<UnstyledButton className={cx(classes.user)}>
-						<Group gap={7}>
-							{/*<Avatar src={user.image} alt={user.name} radius="xl" size={20} />*/}
-							<Text fw={500} size="sm" lh={1} mr={3}>
-								{data.user.name}
-							</Text>
-						</Group>
-					</UnstyledButton>
+					{!data.user.emailVerified ? (
+						<Indicator inline processing color="red" size={6}>
+							<UnstyledButton className={cx(classes.user)}>
+								<Group gap={7}>
+									{/*<Avatar name={data.user.name} color="initials" />*/}
+									<Text fw={500} size="sm" lh={1} mr={3}>
+										{data.user.name}
+									</Text>
+								</Group>
+							</UnstyledButton>
+						</Indicator>
+					) : (
+						<UnstyledButton className={cx(classes.user)}>
+							<Group gap={7}>
+								{/*<Avatar name={data.user.name} color="initials" />*/}
+								<Text fw={500} size="sm" lh={1} mr={3}>
+									{data.user.name}
+								</Text>
+							</Group>
+						</UnstyledButton>
+					)}
 				</Menu.Target>
 				<Menu.Dropdown>
 					<Menu.Item

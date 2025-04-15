@@ -60,7 +60,7 @@ export function Header() {
 					{...items}
 				</Group>
 
-				<Group gap={5} visibleFrom="sm">
+				<Group gap="md" visibleFrom="sm">
 					<HeaderAuth />
 					<ActionIcon
 						variant="default"
