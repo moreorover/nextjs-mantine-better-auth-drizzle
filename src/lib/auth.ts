@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { twoFactor } from "better-auth/plugins";
+import { admin, twoFactor } from "better-auth/plugins";
 
 import { db } from "@/db/drizzle";
 import {
@@ -54,5 +54,5 @@ export const auth = betterAuth({
 			});
 		},
 	},
-	plugins: [twoFactor(), nextCookies()], // make sure nextCookies is the last plugin in the array
+	plugins: [admin(), twoFactor(), nextCookies()], // make sure nextCookies is the last plugin in the array
 });
