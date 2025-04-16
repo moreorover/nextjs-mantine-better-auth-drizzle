@@ -23,18 +23,22 @@ import theme from "@/app/theme";
 import "@mantine/notifications/styles.css";
 import { BanUser } from "@/components/profile/ban-user-modal";
 import { CreateUser } from "@/components/profile/create-user-modal";
+import { auth } from "@/lib/auth";
 import { TRPCReactProvider } from "@/trpc/react";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
 	title: "Prive Video",
 	description: "Video Courses",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const session = await auth.api.getSession({ headers: await headers() });
+	console.log("session", session);
 	return (
 		<html
 			lang="en"
