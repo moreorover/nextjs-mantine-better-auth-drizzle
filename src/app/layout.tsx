@@ -17,7 +17,6 @@ import { GenerateBackupCodes } from "@/components/profile/generate-backup-codes-
 import { ShowTwoFactorQrCode } from "@/components/profile/show-2fa-modal";
 import { ShowBackupCodes } from "@/components/profile/show-backup-codes";
 import { TotpVerification } from "@/components/profile/totp-verification";
-import { WrapperWithQuery } from "@/components/wrapper";
 
 import "@/app/globals.css";
 import theme from "@/app/theme";
@@ -63,7 +62,7 @@ export default function RootLayout({
 						>
 							<Notifications />
 							<Header />
-							<WrapperWithQuery>{children}</WrapperWithQuery>
+							{children}
 						</ModalsProvider>
 					</MantineProvider>
 				</TRPCReactProvider>
