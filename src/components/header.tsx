@@ -21,7 +21,7 @@ import { HeaderAuth } from "@/components/header-auth";
 import classes from "@/components/header.module.css";
 
 const links = [
-	{ link: "/about", label: "About" },
+	{ link: "/dashboard", label: "Dashboard" },
 	{ link: "/pricing", label: "Pricing" },
 	{ link: "/learn", label: "Learn" },
 	{ link: "/community", label: "Community" },
@@ -34,7 +34,12 @@ export function Header() {
 
 	const logo = (
 		<UnstyledButton onClick={() => router.push("/")}>
-			<Icon icon="lucide:cherry" width="24" height="24" />
+			<Icon
+				icon="lucide:cherry"
+				width="24"
+				height="24"
+				style={{ color: "#eb3eb1" }}
+			/>
 		</UnstyledButton>
 	);
 
