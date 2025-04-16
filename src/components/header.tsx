@@ -4,18 +4,18 @@ import { Icon } from "@iconify/react";
 import {
 	ActionIcon,
 	Burger,
-	Button,
 	Container,
 	Divider,
 	Drawer,
 	Group,
 	ScrollArea,
 	Stack,
+	UnstyledButton,
 	useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { HeaderAuth } from "@/components/header-auth";
 import classes from "@/components/header.module.css";
@@ -30,11 +30,12 @@ const links = [
 export function Header() {
 	const [opened, { toggle }] = useDisclosure(false);
 	const pathname = usePathname();
+	const router = useRouter();
 
 	const logo = (
-		<Button component={Link} href="/">
-			Logo
-		</Button>
+		<UnstyledButton onClick={() => router.push("/")}>
+			<Icon icon="lucide:cherry" width="24" height="24" />
+		</UnstyledButton>
 	);
 
 	const items = links.map((link) => (
