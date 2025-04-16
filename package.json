@@ -40,7 +40,7 @@
     "react-qr-code": "^2.0.15",
     "resend": "^4.3.0",
     "superjson": "^2.2.2",
-    "tailwind-preset-mantine": "^2.0.5",
+    "tailwind-preset-mantine": "^2.0.6",
     "ua-parser-js": "^2.0.3",
     "zod": "^3.24.2"
   },
