@@ -20,12 +20,16 @@ export async function middleware(request: NextRequest) {
 
 	// Handle /profile access
 	if (!cookies) {
-		return NextResponse.redirect(new URL("/", request.url));
+		return NextResponse.redirect(new URL("/sign-in", request.url));
+	}
+
+	if (url.pathname === "/") {
+		return NextResponse.redirect(new URL("/profile", request.url));
 	}
 
 	return NextResponse.next();
 }
 
 export const config = {
-	matcher: ["/profile", "/two-factor", "/backup-code", "/admin"],
+	matcher: ["/profile", "/two-factor", "/backup-code", "/admin", "/"],
 };

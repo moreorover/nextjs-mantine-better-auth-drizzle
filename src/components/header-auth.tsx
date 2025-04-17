@@ -35,9 +35,11 @@ export function HeaderAuth() {
 
 	return (
 		<>
-			<Button component={Link} href="/admin" variant="light" size="xs">
-				admin
-			</Button>
+			{data.user.role === "admin" && (
+				<Button component={Link} href="/admin" variant="light" size="xs">
+					admin
+				</Button>
+			)}
 			<Menu>
 				<Menu.Target>
 					{!data.user.emailVerified ? (
