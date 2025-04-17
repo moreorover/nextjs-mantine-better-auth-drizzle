@@ -1,6 +1,6 @@
-import {getSession} from "@/lib/auth";
-import {AdminView} from "@/modules/admin/ui/views/admin-view";
-import {redirect} from "next/navigation";
+import { getSession } from "@/lib/auth";
+import { AdminView } from "@/modules/admin/ui/views/admin-view";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
 	const session = await getSession();
